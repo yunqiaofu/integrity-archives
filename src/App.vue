@@ -27,14 +27,14 @@
     <!-- </div> -->
 
     <div id="content">
-      <div id="routers">
+      <!-- <div id="routers">
         <router-link to="/">
           Home
         </router-link> |
         <router-link to="/about">
           About
         </router-link>
-      </div>
+      </div> -->
       <router-view />
       <!-- <locale-changer style="position: fixed; right: 30px; top: 50px;" /> -->
     </div>

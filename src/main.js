@@ -7,6 +7,9 @@ import store from './store'
 import SvgIcon from 'components/svgIcon/index.vue'
 import 'components/svgIcon/index.js'
 import i18n from './i18n'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+import db from './db'
 
 import $backend from '@/backend'
 const ipc = require('electron').ipcRenderer
@@ -15,8 +18,9 @@ Vue.component('svg-icon', SvgIcon)
 Vue.prototype.$backend = $backend
 Vue.prototype.$ipc = ipc
 Vue.prototype.$dialog = dialog
+Vue.prototype.$db = db
 Vue.config.productionTip = false
-
+Vue.use(ElementUI)
 // Navigation guard (interceptor) , executes code before each jump of the router
 // 导航守卫（拦截器），在router每次跳转前执行
 router.beforeEach((to, from, next) => {

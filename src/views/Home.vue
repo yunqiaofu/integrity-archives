@@ -1,60 +1,98 @@
 <template>
-  <div style="text-align: center;">
-    <div>
-      <!-- <img src="~static/logo.png"> -->
-      <input type="text">
-    </div>
-    <div style="font-size: 21px; padding: 20px;">
-      <!--这是一段使用了i18n的文字，请看locales文件夹中的翻译文件-->
-      <!--This is a text using i18n, please see the translation files in the locales folder-->
-      {{ $t("welcome") }}
-    </div>
-    <!-- <div style="display: flex; justify-content: center;">
-      <div
-        class="home-button app-action-button"
-        @click="openDialogByRemote"
-      >
-        {{ $t("Click Me!") }}
-      </div>
-      <div
-        class="home-button app-action-button"
-        @click="openDialogByIpc"
-      >
-        Click Me!!!
-      </div>
-    </div> -->
-  </div>
+  <el-tabs
+    v-model="editableTabsValue"
+    type="card"
+    size="mini"
+  >
+    <el-tab-pane
+      v-for="(item,i) in editableTabs"
+      :key="i++"
+      :label="item.title"
+      :name="item.name"
+    >
+      <component :is="item.content" />
+    </el-tab-pane>
+  </el-tabs>
 </template>
-
 <script>
+import userInfo from './userInfo'
+import table1 from './table/table1'
 export default {
+  components: { userInfo, table1 },
   data () {
     return {
-
+      editableTabsValue: '0',
+      editableTabs: [{
+        title: '基本信息',
+        content: 'userInfo'
+      }, {
+        title: '表1',
+        content: 'table1'
+      }, {
+        title: '表2',
+        content: 'table1'
+      }, {
+        title: '表3',
+        content: 'table1'
+      }, {
+        title: '表4',
+        content: 'table1'
+      }, {
+        title: '表5',
+        content: 'table1'
+      }, {
+        title: '表6',
+        content: 'table1'
+      }, {
+        title: '表7',
+        content: 'table1'
+      }, {
+        title: '表8',
+        content: 'table1'
+      }, {
+        title: '表9',
+        content: 'table1'
+      }, {
+        title: '表10',
+        content: 'table1'
+      }, {
+        title: '表11',
+        content: 'table1'
+      }, {
+        title: '表12',
+        content: 'table1'
+      }, {
+        title: '表13',
+        content: 'table1'
+      }, {
+        title: '表14',
+        content: 'table1'
+      }, {
+        title: '其他事项',
+        content: 'table1'
+      }]
     }
   },
+  mounted () {
+    // 监听与主进程的通信
+    this.$ipc.on('action', (event, arg) => {
+      switch (arg) {
+        case 'open': // 打开文件
+          console.log('open')
+          break
+        case 'about': // 关于
+          console.log('about')
+          break
+        case 'save': // 保存
+          console.log('save')
+          break
+        case 'newSave': // 另存为
+          console.log('newSave')
+          break
+      }
+    })
+  },
   methods: {
-    openDialogByRemote () {
-      this.$dialog.showMessageBox({ title: '你好', message: '来自主进程的消息：', detail: '我是来自主进程的dialog，使用remote过来的！', type: 'info' })
-    },
-    openDialogByIpc () {
-      this.$ipc.send('showDialog', `<${this.$t('a message')}>`)
-    }
   }
-
 }
 </script>
-
-<style>
-.home-button {
-  background-color: #263238;
-  opacity: 1;
-  border-radius: 4px;
-  cursor: pointer;
-  height: 45px;
-  width: 150px;
-  margin: 10px 10px;
-  text-align: center;
-  line-height: 45px;
-}
-</style>

@@ -103,13 +103,3 @@ yarn packapp & npm run packapp
 
 ---
 ## 🌹Thanks
-
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
-| [<img src="https://avatars0.githubusercontent.com/u/1502581?&v=4" width="100px;" alt="Hancel Lin"/><br /><sub><b>Hancel Lin</b></sub>](https://github.com/imlinhanchao)<br /> |
-| :---: |
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-🌺Welcome your suggestions.

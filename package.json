@@ -1,6 +1,7 @@
 {
-  "name": "vue-cli-electron",
-  "version": "0.2.0",
+  "name": "collection",
+  "productName": "廉情信息报告表",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -12,8 +13,14 @@
     "postuninstall": "electron-builder install-app-deps"
   },
   "main": "background.js",
+  "keywords": [],
+  "author": "xkloveme",
+  "license": "MIT",
   "dependencies": {
     "core-js": "^3.6.4",
+    "dexie": "^3.0.1",
+    "element-ui": "^2.13.2",
+    "jszip": "^3.5.0",
     "svg-sprite-loader": "^4.2.1",
     "vue": "^2.6.11",
     "vue-i18n": "^8.15.5",
