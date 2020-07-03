@@ -2,7 +2,7 @@
   <el-tabs
     v-model="editableTabsValue"
     type="card"
-    size="mini"
+    class="home-title"
   >
     <el-tab-pane
       v-for="(item,i) in editableTabs"
@@ -96,3 +96,17 @@ export default {
   }
 }
 </script>
+
+<style >
+.home-title > .is-top{
+  position: fixed;
+  top:0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  z-index: 99;
+}
+.home-title > .el-tabs__content{
+  margin-top: 50px;
+}
+</style>

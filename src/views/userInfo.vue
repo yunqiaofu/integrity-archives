@@ -4,6 +4,7 @@
       <el-form
         ref="form"
         :model="form"
+        :rules="rules"
         label-width="80px"
       >
         <el-form-item label="活动名称">
@@ -76,11 +77,66 @@
             <el-radio label="线下场地免费" />
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="活动形式">
+        <el-form-item label="照片上传">
+          <input
+            ref="input"
+            type="file"
+            accept="image/*"
+            style="display:none"
+            @change="handleAvatarSuccess"
+          >
+          <div class="avatar-uploader">
+            <el-image
+              v-if="form.imageUrl"
+              :src="form.imageUrl"
+              class="avatar"
+              :fit="fit"
+            >
+              <div
+                slot="error"
+                class="image-slot"
+              >
+                <i class="el-icon-picture-outline" />
+              </div>
+            </el-image>
+            <i
+              v-else
+              class="el-icon-plus"
+              @click="$refs.input.click()"
+            />
+          </div>
+        </el-form-item>
+        <el-form-item
+          label="密码"
+          prop="pass"
+        >
           <el-input
-            v-model="form.desc"
-            type="textarea"
-          />
+            v-model="form.pass"
+            :type="passType?'password':'text'"
+            autocomplete="off"
+          >
+            <el-button
+              slot="append"
+              icon="el-icon-view"
+              @click="passType=!passType"
+            />
+          </el-input>
+        </el-form-item>
+        <el-form-item
+          label="确认密码"
+          prop="checkPass"
+        >
+          <el-input
+            v-model="form.checkPass"
+            :type="checkPassType?'password':'text'"
+            autocomplete="off"
+          >
+            <el-button
+              slot="append"
+              icon="el-icon-view"
+              @click="checkPassType=!checkPassType"
+            />
+          </el-input>
         </el-form-item>
         <el-form-item>
           <el-button
@@ -93,23 +149,6 @@
         </el-form-item>
       </el-form>
     </div>
-    <el-upload
-      class="avatar-uploader"
-      action="http://xxx.com"
-      :show-file-list="false"
-      :on-success="handleAvatarSuccess"
-      :before-upload="beforeAvatarUpload"
-    >
-      <img
-        v-if="form.imageUrl"
-        :src="form.imageUrl"
-        class="avatar"
-      >
-      <i
-        v-else
-        class="el-icon-plus avatar-uploader-icon"
-      />
-    </el-upload>
     <div
       class="home-button app-action-button"
       @click="loadAsyncZip"
@@ -144,6 +183,23 @@ var JSZip = require('jszip')
 const fs = require('fs')
 export default {
   data () {
+    var validatePass = (rule, value, callback) => {
+      if (value === '') {
+        callback()
+      } else {
+        if (this.form.checkPass !== '') {
+          this.$refs.form.validateField('checkPass')
+        }
+        callback()
+      }
+    }
+    var validatePass2 = (rule, value, callback) => {
+      if (value !== this.form.pass) {
+        callback(new Error('两次输入密码不一致!'))
+      } else {
+        callback()
+      }
+    }
     return {
       form: {
         name: '',
@@ -154,7 +210,14 @@ export default {
         delivery: false,
         type: [],
         resource: '',
-        desc: ''
+        pass: '',
+        checkPass: ''
+      },
+      passType: true,
+      checkPassType: true,
+      rules: {
+        pass: [{ validator: validatePass, trigger: 'blur' }],
+        checkPass: [{ validator: validatePass2, trigger: 'blur' }]
       }
     }
   },
@@ -171,31 +234,42 @@ export default {
       this.$ipc.send('showDialog', `<${this.$t('a message')}>`)
     },
     onSubmit () {
-      console.log('submit!', this.form)
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          console.log('submit!', this.form)
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
     },
     // 图片上传
-    handleAvatarSuccess (res, file) {
-      console.log('🐛:: handleAvatarSuccess -> file', file.raw)
-      this.imageUrl = URL.createObjectURL(file.raw)
-    },
-    beforeAvatarUpload (file) {
-      const isJPG = file.type === 'image/jpeg'
-      const isLt2M = file.size / 1024 / 1024 < 2
+    handleAvatarSuccess (e) {
+      var file = e.target.files[0] // 获取图片资源
+      const self = this
+      // 只选择图片文件
+      if (!file.type.match('image.*')) {
+        return false
+      }
 
-      if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!')
+      var reader = new FileReader()
+
+      reader.readAsDataURL(file) // 读取文件
+
+      // 渲染文件
+      reader.onload = function (arg) {
+        console.log(arg.target.result)
+        self.form.imageUrl = arg.target.result
       }
-      if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!')
-      }
-      return isJPG && isLt2M
     },
     downloadZip () {
       // 初始化一个zip打包对象
       var zip = new JSZip()
-      // 创建一个被用来打包的名为Hello.txt的文件
-      zip.file('user.json', '{"a":"1","b":[{"c":2,"d":"3"}]}')
-      zip.file('password', '123456')
+      // 创建一个被用来打包的文件
+      zip.file('user.json', JSON.stringify(this.form))
+      if (this.form.pass) {
+        zip.file('password', this.form.pass)
+      }
       // 创建一个名为images的新的文件目录
       // var img = zip.folder('images')
       // 这个images文件目录中创建一个base64数据为imgData的图像，图像名是smile.gif
@@ -222,7 +296,6 @@ export default {
         filters: [{ name: 'WT', extensions: ['wt'] }],
         properties: ['openFile']
       })
-      let text = ''
       if (files) {
         files.then(res => {
           // const buf = Buffer.alloc(1024)
@@ -242,10 +315,10 @@ export default {
                       if (String(value) === String(pwd)) {
                         self.$message({
                           type: 'success',
-                          message: '密码正确: ' + value
+                          message: '密码正确'
                         })
                         zip.files['user.json'].async('text').then(res => {
-                          text = res
+                          self.getJson(res)
                         })
                       } else {
                         self.$message({
@@ -263,17 +336,19 @@ export default {
                 })
               } else {
                 zip.files['user.json'].async('text').then(res => {
-                  text = res
+                  self.getJson(res)
                 })
-              }
-              if (text) {
-                console.log('🐛:: loadAsyncZip -> text', text)
-                const jsonData = JSON.parse(res)
-                console.log(jsonData)
               }
             })
           })
         })
+      }
+    },
+    getJson (text) {
+      if (text) {
+        console.log('🐛:: loadAsyncZip -> text', text)
+        const jsonData = JSON.parse(text)
+        console.log(jsonData)
       }
     }
   }
@@ -291,5 +366,28 @@ export default {
   margin: 10px 10px;
   text-align: center;
   line-height: 45px;
+}
+.avatar-uploader {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader:hover {
+  border-color: #409eff;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
 }
 </style>

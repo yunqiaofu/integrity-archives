@@ -25,9 +25,9 @@
         </div>
       </div> -->
     <!-- </div> -->
-
-    <div id="content">
-      <!-- <div id="routers">
+    <router-view />
+    <!-- <div id="content"> -->
+    <!-- <div id="routers">
         <router-link to="/">
           Home
         </router-link> |
@@ -35,9 +35,9 @@
           About
         </router-link>
       </div> -->
-      <router-view />
-      <!-- <locale-changer style="position: fixed; right: 30px; top: 50px;" /> -->
-    </div>
+
+    <!-- <locale-changer style="position: fixed; right: 30px; top: 50px;" /> -->
+    <!-- </div> -->
   </div>
 </template>
 

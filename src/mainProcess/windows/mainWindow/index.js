@@ -39,6 +39,8 @@ class MainWindow {
           webSecurity: false,
           nodeIntegration: true
         },
+        // eslint-disable-next-line no-undef
+        // icon: `${__static}/app.ico`,
         frame: true
       })
 
@@ -70,28 +72,33 @@ class MainWindow {
           ]
         },
         {
-          label: '打开',
-          role: 'open',
-          accelerator: 'Command+O',
-          click () {
-            win.webContents.send('action', 'open')
-          }
-        },
-        {
-          label: '保存',
-          role: 'save',
-          accelerator: 'Command+S',
-          click () {
-            win.webContents.send('action', 'save')
-          }
-        },
-        {
-          label: '另存为',
-          role: 'newSave',
-          accelerator: 'Command+N',
-          click () {
-            win.webContents.send('action', 'newSave')
-          }
+          label: '文件',
+          submenu: [
+            {
+              label: '打开',
+              role: 'open',
+              accelerator: 'Command+O',
+              click () {
+                win.webContents.send('action', 'open')
+              }
+            },
+            {
+              label: '保存',
+              role: 'save',
+              accelerator: 'Command+S',
+              click () {
+                win.webContents.send('action', 'save')
+              }
+            },
+            {
+              label: '另存为',
+              role: 'newSave',
+              accelerator: 'Command+N',
+              click () {
+                win.webContents.send('action', 'newSave')
+              }
+            }
+          ]
         }
       ]
       const menu = Menu.buildFromTemplate(template)
