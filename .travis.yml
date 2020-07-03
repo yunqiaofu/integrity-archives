@@ -19,12 +19,12 @@ cache:
     - node_modules
 
 install:
-  - yarn install
+  - npm install
 
 script:
-  - yarn lint
-  - yarn go
-  - yarn packapp
+  - npm run lint
+  - npm run go
+  - npm run packapp
 
 branches:
   only:
