@@ -11,6 +11,9 @@ environment:
     secure: p3N9nAtWTIEuQlVJNnyoh9iGi/tIcl1dsUbdk3kLUfblKVT5wZvnNa4o0uyuXWjV
 cache:
   - node_modules
+  - '%APPDATA%\npm-cache'
+  - '%USERPROFILE%\.electron'
+
 
 init:
   - git config --global core.autocrlf input
