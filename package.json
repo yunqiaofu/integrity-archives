@@ -10,6 +10,7 @@
     "lint": "vue-cli-service lint",
     "go": "vue-cli-service electron:serve",
     "packapp": "vue-cli-service electron:build",
+    "release": "vue-cli-service electron:build",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
     "patch": "npm version patch && git push origin master && git push origin --tags",

@@ -20,7 +20,7 @@ install:
 
 script:
   - npm run lint
-  - npm run packapp
+  - npm run release
 
 branches:
   only:
