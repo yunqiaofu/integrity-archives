@@ -1,54 +1,13 @@
 <template>
   <div id="app">
-    <!-- <div id="app-bar"> -->
-    <!-- <div id="app-title">
-        vue-cli-electron-template
-      </div> -->
-    <!-- <div id="app-action">
-        <div
-          class="app-action-button"
-          @click="win.minimize()"
-        >
-          <svg-icon icon-class="app-hidden" />
-        </div>
-        <div
-          class="app-action-button"
-          @click="autoMaximize()"
-        >
-          <svg-icon icon-class="app-fullsize" />
-        </div>
-        <div
-          class="app-action-button button-red"
-          @click="win.close()"
-        >
-          <svg-icon icon-class="app-exit" />
-        </div>
-      </div> -->
-    <!-- </div> -->
     <router-view />
-    <!-- <div id="content"> -->
-    <!-- <div id="routers">
-        <router-link to="/">
-          Home
-        </router-link> |
-        <router-link to="/about">
-          About
-        </router-link>
-      </div> -->
-
-    <!-- <locale-changer style="position: fixed; right: 30px; top: 50px;" /> -->
-    <!-- </div> -->
   </div>
 </template>
 
 <script>
 import { remote } from 'electron'
-// import localeChanger from 'components/localeChanger'
 
 export default {
-  // components: {
-  //   localeChanger
-  // },
   data () {
     return {
       win: remote.getCurrentWindow(),

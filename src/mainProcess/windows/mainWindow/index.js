@@ -53,59 +53,59 @@ class MainWindow {
   }
 
   setWindowMenu (win) {
-    if (process.platform === 'darwin') {
-      const template = [
-        {
-          label: '廉情信息报告表',
-          submenu: [
-            {
-              label: `关于${app.getName()}`,
-              role: 'about',
-              accelerator: 'Command+I',
-              click () {
-                win.webContents.send('action', 'about')
-              }
-            },
-            { label: '隐藏', role: 'hide' },
-            { type: 'separator' },
-            { label: '退出', role: 'quit', accelerator: 'Command+Q' }
-          ]
-        },
-        {
-          label: '文件',
-          submenu: [
-            {
-              label: '打开',
-              role: 'open',
-              accelerator: 'Command+O',
-              click () {
-                win.webContents.send('action', 'open')
-              }
-            },
-            {
-              label: '保存',
-              role: 'save',
-              accelerator: 'Command+S',
-              click () {
-                win.webContents.send('action', 'save')
-              }
-            },
-            {
-              label: '另存为',
-              role: 'newSave',
-              accelerator: 'Command+N',
-              click () {
-                win.webContents.send('action', 'newSave')
-              }
+    // if (process.platform === 'darwin') {
+    const template = [
+      {
+        label: '廉情信息报告表',
+        submenu: [
+          {
+            label: `关于${app.getName()}`,
+            role: 'about',
+            accelerator: 'Command+I',
+            click () {
+              win.webContents.send('action', 'about')
             }
-          ]
-        }
-      ]
-      const menu = Menu.buildFromTemplate(template)
-      Menu.setApplicationMenu(menu)
-    } else {
-      Menu.setApplicationMenu(null)
-    }
+          },
+          { label: '隐藏', role: 'hide' },
+          { type: 'separator' },
+          { label: '退出', role: 'quit', accelerator: 'Command+Q' }
+        ]
+      },
+      {
+        label: '文件',
+        submenu: [
+          {
+            label: '打开',
+            role: 'open',
+            accelerator: 'Command+O',
+            click () {
+              win.webContents.send('action', 'open')
+            }
+          },
+          {
+            label: '保存',
+            role: 'save',
+            accelerator: 'Command+S',
+            click () {
+              win.webContents.send('action', 'save')
+            }
+          },
+          {
+            label: '另存为',
+            role: 'newSave',
+            accelerator: 'Command+N',
+            click () {
+              win.webContents.send('action', 'newSave')
+            }
+          }
+        ]
+      }
+    ]
+    const menu = Menu.buildFromTemplate(template)
+    Menu.setApplicationMenu(menu)
+    // } else {
+    //   Menu.setApplicationMenu(null)
+    // }
   }
 }
 

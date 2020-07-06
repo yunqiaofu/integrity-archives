@@ -9,11 +9,11 @@ node_js:
 matrix:
   include:
     - os: linux
-    before_install: # 为了支持打包rpm格式的包
-      - sudo apt-get update
-      - sudo apt-get install --no-install-recommends -y gcc-multilib g++-multilib
-      - sudo snap install snapcraft --classic
-      - sudo apt-get install --no-install-recommends -y rpm
+      before_install: # 为了支持打包rpm格式的包
+        - sudo apt-get update
+        - sudo apt-get install --no-install-recommends -y gcc-multilib g++-multilib
+        - sudo snap install snapcraft --classic
+        - sudo apt-get install --no-install-recommends -y rpm
     - os: osx
 
 cache:
@@ -21,12 +21,12 @@ cache:
     - node_modules
 
 install:
-  - npm install
+  - yarn install
 
 script:
-  - npm run lint
-  - npm run packapp
-  - npm run release
+  - yarn lint
+  - yarn packapp
+  - yarn release
 
 branches:
   only:
