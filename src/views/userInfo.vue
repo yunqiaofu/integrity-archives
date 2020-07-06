@@ -7,137 +7,171 @@
         :rules="rules"
         label-width="80px"
       >
-        <el-form-item label="活动名称">
-          <el-input v-model="form.name" />
-        </el-form-item>
-        <el-form-item label="活动区域">
-          <el-select
-            v-model="form.region"
-            placeholder="请选择活动区域"
-          >
-            <el-option
-              label="区域一"
-              value="shanghai"
-            />
-            <el-option
-              label="区域二"
-              value="beijing"
-            />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="活动时间">
-          <el-col :span="11">
-            <el-date-picker
-              v-model="form.date1"
-              type="date"
-              placeholder="选择日期"
-              style="width: 100%;"
-            />
+        <el-row :gutter="0">
+          <el-col :span="6">
+            <el-form-item label="姓名">
+              <el-input v-model="form.name" />
+            </el-form-item>
           </el-col>
-          <el-col
-            class="line"
-            :span="2"
-          >
-            -
+          <el-col :span="6">
+            <el-form-item label="身份证号">
+              <el-input v-model="form.idCard" />
+            </el-form-item>
           </el-col>
-          <el-col :span="11">
-            <el-time-picker
-              v-model="form.date2"
-              placeholder="选择时间"
-              style="width: 100%;"
-            />
-          </el-col>
-        </el-form-item>
-        <el-form-item label="即时配送">
-          <el-switch v-model="form.delivery" />
-        </el-form-item>
-        <el-form-item label="活动性质">
-          <el-checkbox-group v-model="form.type">
-            <el-checkbox
-              label="美食/餐厅线上活动"
-              name="type"
-            />
-            <el-checkbox
-              label="地推活动"
-              name="type"
-            />
-            <el-checkbox
-              label="线下主题活动"
-              name="type"
-            />
-            <el-checkbox
-              label="单纯品牌曝光"
-              name="type"
-            />
-          </el-checkbox-group>
-        </el-form-item>
-        <el-form-item label="特殊资源">
-          <el-radio-group v-model="form.resource">
-            <el-radio label="线上品牌商赞助" />
-            <el-radio label="线下场地免费" />
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="照片上传">
-          <input
-            ref="input"
-            type="file"
-            accept="image/*"
-            style="display:none"
-            @change="handleAvatarSuccess"
-          >
-          <div class="avatar-uploader">
-            <el-image
-              v-if="form.imageUrl"
-              :src="form.imageUrl"
-              class="avatar"
-              :fit="fit"
-            >
-              <div
-                slot="error"
-                class="image-slot"
+          <el-col :span="6">
+            <el-form-item label="民族">
+              <el-select
+                v-model="form.nation"
+                placeholder="请选择"
               >
-                <i class="el-icon-picture-outline" />
-              </div>
-            </el-image>
-            <i
-              v-else
-              class="el-icon-plus"
-              @click="$refs.input.click()"
-            />
-          </div>
-        </el-form-item>
-        <el-form-item
-          label="密码"
-          prop="pass"
-        >
+                <el-option
+                  v-for="item in $utils.nation"
+                  :key="item"
+                  :label="item"
+                  :value="item"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="政治面貌">
+              <el-select
+                v-model="form.politicsStatus"
+                placeholder="请选择"
+              >
+                <el-option
+                  v-for="item in $utils.politicsStatus"
+                  :key="item"
+                  :label="item"
+                  :value="item"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+
+        <el-row :gutter="10">
+          <el-col :span="20">
+            <el-row>
+              <el-col :span="12">
+                <el-form-item label="工作单位">
+                  <!-- <el-select
+                    v-model="form.politicsStatus"
+                    placeholder="请选择"
+                  >
+                    <el-option
+                      v-for="item in $utils.politicsStatus"
+                      :key="item"
+                      :label="item"
+                      :value="item"
+                    />
+                  </el-select>-->
+                  <el-input v-model="form.work" />
+                </el-form-item>
+                <el-form-item label="现任职务">
+                  <el-input v-model="form.duty" />
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="工作部门">
+                  <el-input v-model="form.department" />
+                </el-form-item>
+                <el-form-item label="入党时间">
+                  <el-input v-model="form.partyTime" />
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-form-item label="人员身份">
+              <el-checkbox-group v-model="form.identity">
+                <el-checkbox
+                  v-for="(item,i) in $utils.identity"
+                  :key="i+1"
+                  :label="item"
+                />
+              </el-checkbox-group>
+            </el-form-item>
+            <el-form-item label="户籍地址">
+              <el-input v-model="form.HouseholdRegistration" />
+            </el-form-item>
+            <el-form-item label="现居住地">
+              <el-input v-model="form.currentResidence" />
+            </el-form-item>
+            <el-col :span="12">
+              <el-form-item
+                label="密码"
+                prop="password"
+              >
+                <el-input
+                  v-model="form.password"
+                  :type="passType?'password':'text'"
+                  autocomplete="off"
+                >
+                  <el-button
+                    slot="append"
+                    icon="el-icon-view"
+                    @click="passType=!passType"
+                  />
+                </el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item
+                label="确认密码"
+                prop="checkPassword"
+              >
+                <el-input
+                  v-model="form.checkPassword"
+                  :type="checkPassType?'password':'text'"
+                  autocomplete="off"
+                >
+                  <el-button
+                    slot="append"
+                    icon="el-icon-view"
+                    @click="checkPassType=!checkPassType"
+                  />
+                </el-input>
+              </el-form-item>
+            </el-col>
+          </el-col>
+          <el-col :span="4">
+            <input
+              ref="input"
+              type="file"
+              accept="image/*"
+              style="display:none"
+              @change="handleAvatarSuccess"
+            >
+            <div class="avatar-uploader">
+              <el-image
+                v-if="form.imageUrl"
+                :src="form.imageUrl"
+                class="avatar"
+                fit="fit"
+                @click="$refs.input.click()"
+              >
+                <div
+                  slot="error"
+                  class="image-slot"
+                >
+                  <i class="el-icon-picture-outline" />
+                </div>
+              </el-image>
+              <i
+                v-else
+                class="el-icon-plus"
+                @click="$refs.input.click()"
+              />
+            </div>
+          </el-col>
+        </el-row>
+        <el-form-item label="个人简历">
           <el-input
-            v-model="form.pass"
-            :type="passType?'password':'text'"
-            autocomplete="off"
-          >
-            <el-button
-              slot="append"
-              icon="el-icon-view"
-              @click="passType=!passType"
-            />
-          </el-input>
+            v-model="form.personalResume"
+            type="textarea"
+            :autosize="{ minRows: 2, maxRows: 6 }"
+          />
         </el-form-item>
-        <el-form-item
-          label="确认密码"
-          prop="checkPass"
-        >
-          <el-input
-            v-model="form.checkPass"
-            :type="checkPassType?'password':'text'"
-            autocomplete="off"
-          >
-            <el-button
-              slot="append"
-              icon="el-icon-view"
-              @click="checkPassType=!checkPassType"
-            />
-          </el-input>
-        </el-form-item>
+        <!--
         <el-form-item>
           <el-button
             type="primary"
@@ -146,7 +180,7 @@
             立即创建
           </el-button>
           <el-button>取消</el-button>
-        </el-form-item>
+        </el-form-item> -->
       </el-form>
     </div>
     <div
@@ -161,20 +195,6 @@
     >
       下载
     </div>
-    <!-- <div style="display: flex; justify-content: center;">
-      <div
-        class="home-button app-action-button"
-        @click="openDialogByRemote"
-      >
-        {{ $t("Click Me!") }}
-      </div>
-      <div
-        class="home-button app-action-button"
-        @click="openDialogByIpc"
-      >
-        Click Me!!!
-      </div>
-    </div>-->
   </div>
 </template>
 
@@ -194,31 +214,24 @@ export default {
       }
     }
     var validatePass2 = (rule, value, callback) => {
-      if (value !== this.form.pass) {
+      if (value !== this.form.password) {
         callback(new Error('两次输入密码不一致!'))
       } else {
         callback()
       }
     }
     return {
-      form: {
-        name: '',
-        imageUrl: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        pass: '',
-        checkPass: ''
-      },
       passType: true,
       checkPassType: true,
       rules: {
-        pass: [{ validator: validatePass, trigger: 'blur' }],
-        checkPass: [{ validator: validatePass2, trigger: 'blur' }]
+        password: [{ validator: validatePass, trigger: 'blur' }],
+        checkPassword: [{ validator: validatePass2, trigger: 'blur' }]
       }
+    }
+  },
+  computed: {
+    form () {
+      return this.$store.getters.getUser
     }
   },
   methods: {
@@ -238,7 +251,10 @@ export default {
         if (valid) {
           console.log('submit!', this.form)
         } else {
-          console.log('error submit!!')
+          this.$message({
+            type: 'error',
+            message: '请检查输入是否有误'
+          })
           return false
         }
       })
@@ -263,6 +279,7 @@ export default {
       }
     },
     downloadZip () {
+      const self = this
       // 初始化一个zip打包对象
       var zip = new JSZip()
       // 创建一个被用来打包的文件
@@ -276,7 +293,7 @@ export default {
       // img.file('smile.gif', imgData, { base64: true })
       // 把打包内容异步转成blob二进制格式
       zip.generateAsync({ type: 'blob' }).then(function (content) {
-        var filename = new Date() + '.wt'
+        var filename = self.form.name + self.form.idCard + '.wt'
         // 创建隐藏的可下载链接
         var eleLink = document.createElement('a')
         eleLink.download = filename
@@ -346,9 +363,9 @@ export default {
     },
     getJson (text) {
       if (text) {
-        console.log('🐛:: loadAsyncZip -> text', text)
         const jsonData = JSON.parse(text)
         console.log(jsonData)
+        this.$store.dispatch('updateUser', jsonData)
       }
     }
   }
@@ -386,8 +403,6 @@ export default {
   text-align: center;
 }
 .avatar {
-  width: 178px;
-  height: 178px;
   display: block;
 }
 </style>

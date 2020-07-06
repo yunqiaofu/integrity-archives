@@ -39,7 +39,7 @@ img { -webkit-user-drag: none; }
 
 #app {
   height: 100vh;
-  width: 100vw;
+  // width: 100vw;
   // background-color: #2D3A41;
   color: #B2CCD6;
   // ok

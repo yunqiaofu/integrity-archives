@@ -15,13 +15,14 @@ export default new Vuex.Store({
       duty: '', // 现任职务
       partyTime: '', // 入党时间
       // 枚举值:{1:'区管干部',2:'纪检干部',3:'人大代表(区级及其以上)',4:'党代表(区级及其以上)',5:'政协委员(区级及其以上)'}
-      identity: '', // 人员身份 枚举
+      identity: [], // 人员身份 枚举
       HouseholdRegistration: '', // 户籍地址
       currentResidence: '', // 现居住地
       personalResume: '', // 个人简历
       password: '',
       checkPassword: '',
       imageUrl: '', // 照片
+      other: '',
       // 人脉关系
       networking: [
         {
@@ -134,10 +135,57 @@ export default new Vuex.Store({
         reasons: '', // 被追究责任原因
         status: '', // 处理阶段
         result: '' // 处理结果
+      }],
+      // 配偶子女房产情况
+      realEstate: [{
+        people: '', // 产权人
+        relationship: '', // 与本人关系
+        source: '', // 房产来源
+        address: '', // 具体地址
+        area: '', // 建筑面积
+        propertyNature: '', // 产权性质
+        transactionTime: '', // 交易时间
+        transactionPrice: '' // 交易价格
+      }],
+      // 本人配偶注册工商户,个人独资企业或合伙企业
+      partnership: [{
+        title: '', // 称谓
+        name: '',
+        marketSubject: '', // 市场主体
+        businessScope: '', // 经营范围
+        marketSubjectType: '', // 市场主体类型
+        money: '', // 资金数额
+        personalContribution: '', // 个人出资数额
+        fundedRatio: '' // 出资比例
+      }],
+      // 本人配偶车辆情况
+      car: [{
+        brand: '', // 品牌
+        time: '', // 购买时间
+        price: '', // 价格
+        carNumber: '', // 车牌号
+        color: '',
+        desc: '' // 备注
       }]
     }
   },
-  mutations: {},
-  actions: {},
+  getters: {
+    // 参数列表state指的是state数据
+    getUser (state) {
+      return state.user
+    }
+  },
+  mutations: {
+    setUser (state, user) {
+      state.user = user// 将传参设置给state的city
+    }
+  },
+  actions: {
+    updateUser ({ commit, state }, user) {
+      // 跟后台打交道
+      // 调用mutaions里面的方法
+      commit('setUser', user)
+    }
+  },
   modules: {}
 })
