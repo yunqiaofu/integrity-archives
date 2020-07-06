@@ -1,5 +1,5 @@
 
-# 🔥vue-cli-electron-template
+# 🔥廉情信息报告表
 ⭐Using `vue-cli 3` and `Electron 9` built a modular desktop application template. Convenient packaging and program language switching,  with a custom borderless window, including `vue-router`, `vue-i18n`, `axios`, `electron-builder` and more common components, as well as some demo functions.
 
 ![npm](https://img.shields.io/npm/v/@vue/cli?color=aa&label=vue-cli)
@@ -10,7 +10,6 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Pure-Peace/vue-cli-electron-template?color=aa&label=Lightweight&logo=aa&logoColor=aa)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Pure-Peace/vue-cli-electron-template)
 
-- 🌺English / 💖[中文](https://github.com/Pure-Peace/vue-cli-electron-template/blob/master/README_ZH.md)
 
 <h2 align="center">⚡-Introduction-</h2>
 
