@@ -55,18 +55,19 @@
             <el-row>
               <el-col :span="12">
                 <el-form-item label="工作单位">
-                  <!-- <el-select
-                    v-model="form.politicsStatus"
+                  <el-select
+                    v-model="form.work"
+                    style="width:100%"
                     placeholder="请选择"
                   >
                     <el-option
-                      v-for="item in $utils.politicsStatus"
-                      :key="item"
-                      :label="item"
-                      :value="item"
+                      v-for="item in $utils.workOrganization"
+                      :key="item.key"
+                      :label="item.value"
+                      :value="item.key"
                     />
-                  </el-select>-->
-                  <el-input v-model="form.work" />
+                  </el-select>
+                  <!-- <el-input v-model="form.work" /> -->
                 </el-form-item>
                 <el-form-item label="现任职务">
                   <el-input v-model="form.duty" />
