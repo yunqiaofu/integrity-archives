@@ -9,10 +9,6 @@ node_js:
 matrix:
   include:
     - os: linux
-      before_install: # 为了支持打包rpm格式的包
-        - sudo apt-get update
-        - sudo apt-get install --no-install-recommends -y gcc-multilib g++-multilib
-        - sudo apt-get install --no-install-recommends -y rpm
     - os: osx
 
 cache:
@@ -20,12 +16,12 @@ cache:
     - node_modules
 
 install:
-  - yarn install
+  - npm install
 
 script:
-  - yarn lint
-  - yarn packapp
-  - yarn release
+  - npm run lint
+  - npm run packapp
+  - npm run release
 
 branches:
   only:
