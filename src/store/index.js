@@ -22,7 +22,7 @@ export default new Vuex.Store({
       password: '',
       checkPassword: '',
       imageUrl: '', // 照片
-      other: '11',
+      other: '',
       // 人脉关系
       networking: [
         {
