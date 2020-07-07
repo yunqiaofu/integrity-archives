@@ -10,6 +10,7 @@ matrix:
   include:
     - os: linux
       before_install: # 为了支持打包rpm格式的包
+          - sudo add-apt-repository ppa:snappy-dev/tools -y
           - sudo apt-get update
           - sudo apt-get install snapd -y
           - sudo snap refresh
