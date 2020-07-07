@@ -14,7 +14,7 @@ matrix:
           - sudo apt-get update
           - sudo apt-get install snapd -y
           - sudo snap refresh
-          - sudo apt-get install snapcraft --classic
+          - sudo snap install snapcraft --classic -y
           # - sudo apt-get install --no-install-recommends -y gcc-multilib g++-multilib
           # - sudo apt-get install --no-install-recommends -y rpm
     - os: osx
