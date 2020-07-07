@@ -22,11 +22,17 @@
       label="称谓"
     >
       <template scope="scope">
-        <el-input
+        <el-select
           v-model="scope.row.title"
-          size="small"
-          placeholder="请输入内容"
-        />
+          placeholder="请选择"
+        >
+          <el-option
+            v-for="item in $utils.relationshipWithMyself"
+            :key="item.key"
+            :label="item.value"
+            :value="item.key"
+          />
+        </el-select>
       </template>
     </el-table-column>
     <el-table-column
@@ -67,11 +73,17 @@
       label="市场主体类型"
     >
       <template scope="scope">
-        <el-input
+        <el-select
           v-model="scope.row.marketSubjectType"
-          size="small"
-          placeholder="请输入内容"
-        />
+          placeholder="请选择"
+        >
+          <el-option
+            v-for="item in $utils.marketEntities"
+            :key="item.key"
+            :label="item.value"
+            :value="item.key"
+          />
+        </el-select>
       </template>
     </el-table-column>
     <el-table-column

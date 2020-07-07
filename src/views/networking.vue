@@ -28,10 +28,10 @@
           placeholder="请选择"
         >
           <el-option
-            v-for="item in $utils.nation"
-            :key="item"
-            :label="item"
-            :value="item"
+            v-for="item in $utils.relationship"
+            :key="item.key"
+            :label="item.value"
+            :value="item.key"
           />
         </el-select>
       </template>
@@ -53,10 +53,12 @@
       width="180"
     >
       <template scope="scope">
-        <el-input
+        <el-date-picker
           v-model="scope.row.birth"
-          size="small"
-          placeholder="请输入内容"
+          style="width:150px"
+          type="month"
+          value-format="timestamp"
+          placeholder="选择年月"
         />
       </template>
     </el-table-column>
@@ -70,10 +72,10 @@
           placeholder="请选择"
         >
           <el-option
-            v-for="item in $utils.politicsStatus"
+            v-for="(item,i) in $utils.politicsStatus"
             :key="item"
             :label="item"
-            :value="item"
+            :value="i"
           />
         </el-select>
       </template>

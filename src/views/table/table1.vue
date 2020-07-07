@@ -23,10 +23,12 @@
       width="180"
     >
       <template scope="scope">
-        <el-input
+        <el-date-picker
           v-model="scope.row.time"
-          size="small"
-          placeholder="请输入内容"
+          style="width:150px"
+          type="year"
+          value-format="timestamp"
+          placeholder="选择年"
         />
       </template>
     </el-table-column>
@@ -40,10 +42,10 @@
           placeholder="请选择"
         >
           <el-option
-            v-for="item in $utils.nation"
-            :key="item"
-            :label="item"
-            :value="item"
+            v-for="item in $utils.assessment"
+            :key="item.key"
+            :label="item.value"
+            :value="item.key"
           />
         </el-select>
       </template>

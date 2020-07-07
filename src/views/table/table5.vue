@@ -23,11 +23,17 @@
       width="180"
     >
       <template scope="scope">
-        <el-input
+        <el-select
           v-model="scope.row.name"
-          size="small"
-          placeholder="请输入内容"
-        />
+          placeholder="请选择"
+        >
+          <el-option
+            v-for="item in $utils.identification"
+            :key="item.key"
+            :label="item.value"
+            :value="item.key"
+          />
+        </el-select>
       </template>
     </el-table-column>
     <el-table-column
@@ -55,12 +61,15 @@
     </el-table-column>
     <el-table-column
       label="发证时间"
+      width="180"
     >
       <template scope="scope">
-        <el-input
+        <el-date-picker
           v-model="scope.row.time"
-          size="small"
-          placeholder="请输入内容"
+          style="width:150px"
+          type="date"
+          value-format="timestamp"
+          placeholder="选择时间"
         />
       </template>
     </el-table-column>

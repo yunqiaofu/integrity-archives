@@ -22,11 +22,17 @@
       label="称谓"
     >
       <template scope="scope">
-        <el-input
+        <el-select
           v-model="scope.row.title"
-          size="small"
-          placeholder="请输入内容"
-        />
+          placeholder="请选择"
+        >
+          <el-option
+            v-for="item in $utils.familiesType10"
+            :key="item.key"
+            :label="item.value"
+            :value="item.key"
+          />
+        </el-select>
       </template>
     </el-table-column>
     <el-table-column
@@ -44,11 +50,17 @@
       label="是否共同生活"
     >
       <template scope="scope">
-        <el-input
+        <el-select
           v-model="scope.row.isLife"
-          size="small"
-          placeholder="请输入内容"
-        />
+          placeholder="请选择"
+        >
+          <el-option
+            v-for="item in $utils.livingTogether"
+            :key="item.key"
+            :label="item.value"
+            :value="item.key"
+          />
+        </el-select>
       </template>
     </el-table-column>
     <el-table-column
@@ -78,22 +90,34 @@
       label="单位性质"
     >
       <template scope="scope">
-        <el-input
+        <el-select
           v-model="scope.row.unitNature"
-          size="small"
-          placeholder="请输入内容"
-        />
+          placeholder="请选择"
+        >
+          <el-option
+            v-for="item in $utils.unitProperties"
+            :key="item.key"
+            :label="item.value"
+            :value="item.key"
+          />
+        </el-select>
       </template>
     </el-table-column>
     <el-table-column
       label="证件名称"
     >
       <template scope="scope">
-        <el-input
+        <el-select
           v-model="scope.row.cardName"
-          size="small"
-          placeholder="请输入内容"
-        />
+          placeholder="请选择"
+        >
+          <el-option
+            v-for="item in $utils.identification10"
+            :key="item.key"
+            :label="item.value"
+            :value="item.key"
+          />
+        </el-select>
       </template>
     </el-table-column>
     <el-table-column

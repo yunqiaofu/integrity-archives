@@ -40,10 +40,10 @@
                 placeholder="请选择"
               >
                 <el-option
-                  v-for="item in $utils.politicsStatus"
+                  v-for="(item,i) in $utils.politicsStatus"
                   :key="item"
                   :label="item"
-                  :value="item"
+                  :value="i"
                 />
               </el-select>
             </el-form-item>
@@ -77,7 +77,13 @@
                   <el-input v-model="form.department" />
                 </el-form-item>
                 <el-form-item label="入党时间">
-                  <el-input v-model="form.partyTime" />
+                  <el-date-picker
+                    v-model="form.partyTime"
+                    type="month"
+                    style="width:100%"
+                    value-format="timestamp"
+                    placeholder="选择年月"
+                  />
                 </el-form-item>
               </el-col>
             </el-row>
@@ -91,7 +97,7 @@
               </el-checkbox-group>
             </el-form-item>
             <el-form-item label="户籍地址">
-              <el-input v-model="form.HouseholdRegistration" />
+              <el-input v-model="form.householdRegistration" />
             </el-form-item>
             <el-form-item label="现居住地">
               <el-input v-model="form.currentResidence" />
@@ -172,7 +178,7 @@
           />
         </el-form-item>
 
-        <!-- <el-form-item>
+        <el-form-item>
           <el-button
             type="primary"
             @click="onSubmit"
@@ -180,7 +186,7 @@
             立即创建
           </el-button>
           <el-button>取消</el-button>
-        </el-form-item> -->
+        </el-form-item>
       </el-form>
     </div>
     <networking />
@@ -189,6 +195,7 @@
 
 <script>
 import networking from './networking'
+import db from './../db.js'
 var JSZip = require('jszip')
 const fs = require('fs')
 export default {
@@ -235,13 +242,14 @@ export default {
           break
         case 'about': // 关于
           console.log('about')
+          this.openDialogByRemote()
           break
         case 'save': // 保存
           this.downloadZip()
           break
-        case 'newSave': // 另存为
-          this.downloadZip()
-          console.log('newSave')
+        case 'new': // 新建
+          this.openNew()
+          console.log('new')
           break
       }
     })
@@ -249,14 +257,17 @@ export default {
   methods: {
     openDialogByRemote () {
       this.$dialog.showMessageBox({
-        title: '你好',
-        message: '来自主进程的消息：',
-        detail: '我是来自主进程的dialog，使用remote过来的！',
+        title: '廉情信息报告表',
+        message: '欢迎使用廉情信息报告表',
+        detail: '1.1.0版',
         type: 'info'
       })
     },
     openDialogByIpc () {
       this.$ipc.send('showDialog', `<${this.$t('a message')}>`)
+    },
+    openNew () {
+      this.$store.dispatch('updateUser', db)
     },
     onSubmit () {
       this.$refs.form.validate(valid => {

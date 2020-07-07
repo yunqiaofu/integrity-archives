@@ -23,10 +23,12 @@
       width="180"
     >
       <template scope="scope">
-        <el-input
+        <el-date-picker
           v-model="scope.row.startTime"
-          size="small"
-          placeholder="请输入内容"
+          style="width:150px"
+          type="date"
+          value-format="timestamp"
+          placeholder="选择时间"
         />
       </template>
     </el-table-column>
@@ -35,10 +37,12 @@
       width="180"
     >
       <template scope="scope">
-        <el-input
+        <el-date-picker
           v-model="scope.row.endTime"
-          size="small"
-          placeholder="请输入内容"
+          style="width:150px"
+          type="date"
+          value-format="timestamp"
+          placeholder="选择时间"
         />
       </template>
     </el-table-column>
