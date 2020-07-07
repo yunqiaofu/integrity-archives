@@ -19,7 +19,19 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="年度"
+      label="品牌型号"
+      width="180"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.brand"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="购买时间"
       width="180"
     >
       <template scope="scope">
@@ -31,49 +43,39 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="考核情况"
-      width="180"
-    >
-      <template scope="scope">
-        <el-select
-          v-model="scope.row.assessment"
-          placeholder="请选择"
-        >
-          <el-option
-            v-for="item in $utils.nation"
-            :key="item"
-            :label="item"
-            :value="item"
-          />
-        </el-select>
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="agency"
-      label="发文机关"
+      label="价格"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.agency"
+          v-model="scope.row.price"
           size="small"
           placeholder="请输入内容"
         />
       </template>
     </el-table-column>
     <el-table-column
-      prop="symbol"
-      label="文号"
+      label="车牌号码"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.symbol"
+          v-model="scope.row.carNumber"
           size="small"
           placeholder="请输入内容"
         />
       </template>
     </el-table-column>
     <el-table-column
-      prop="agency"
+      label="颜色"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.color"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
       label="备注"
     >
       <template scope="scope">
@@ -102,16 +104,10 @@ export default {
   },
   computed: {
     tableData () {
-      return this.$store.getters.getNetworking
+      return this.$store.getters.getCar
     }
   },
   methods: {
-    // handleCurrentChange (row, event, column) {
-    //   console.log(row, event, column, event.currentTarget)
-    // },
-    // handleEdit (index, row) {
-    //   console.log(index, row)
-    // },
     handleDelete (index, row) {
       if (this.tableData.length > 1) {
         this.tableData.splice(index, 1)
@@ -124,11 +120,12 @@ export default {
     },
     handleAddLine () {
       this.tableData.push({
-        relationship: '', // 本人关系
-        name: '',
-        birth: '', // 出生年月
-        politicsStatus: '',
-        work: ''
+        brand: '', // 品牌
+        time: '', // 购买时间
+        price: '', // 价格
+        carNumber: '', // 车牌号
+        color: '',
+        desc: '' // 备注
       })
     }
   }

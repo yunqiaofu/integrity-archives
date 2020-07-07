@@ -38,10 +38,12 @@ a { outline: none; text-decoration: none; -webkit-user-drag: none; color: #B2CCD
 img { -webkit-user-drag: none; }
 
 #app {
-  height: 100vh;
+  // height: 100vh;
+  padding: 0 20px;
   // width: 100vw;
   // background-color: #2D3A41;
   color: #B2CCD6;
+  background: #fff;
   // ok
   font-family: 'Microsoft YaHei', 'Avenir', 'Helvetica', 'Arial', 'sans-serif';
   -webkit-font-smoothing: antialiased;

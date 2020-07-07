@@ -19,8 +19,29 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="年度"
-      width="180"
+      label="称谓"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.title"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="姓名"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.name"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="被追究时间"
     >
       <template scope="scope">
         <el-input
@@ -31,54 +52,34 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="考核情况"
+      label="被追究刑事责任原因"
       width="180"
     >
       <template scope="scope">
-        <el-select
-          v-model="scope.row.assessment"
-          placeholder="请选择"
-        >
-          <el-option
-            v-for="item in $utils.nation"
-            :key="item"
-            :label="item"
-            :value="item"
-          />
-        </el-select>
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="agency"
-      label="发文机关"
-    >
-      <template scope="scope">
         <el-input
-          v-model="scope.row.agency"
+          v-model="scope.row.reasons"
           size="small"
           placeholder="请输入内容"
         />
       </template>
     </el-table-column>
     <el-table-column
-      prop="symbol"
-      label="文号"
+      label="处理阶段"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.symbol"
+          v-model="scope.row.status"
           size="small"
           placeholder="请输入内容"
         />
       </template>
     </el-table-column>
     <el-table-column
-      prop="agency"
-      label="备注"
+      label="处理结果"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.desc"
+          v-model="scope.row.result"
           size="small"
           placeholder="请输入内容"
         />
@@ -102,16 +103,10 @@ export default {
   },
   computed: {
     tableData () {
-      return this.$store.getters.getNetworking
+      return this.$store.getters.getCriminal
     }
   },
   methods: {
-    // handleCurrentChange (row, event, column) {
-    //   console.log(row, event, column, event.currentTarget)
-    // },
-    // handleEdit (index, row) {
-    //   console.log(index, row)
-    // },
     handleDelete (index, row) {
       if (this.tableData.length > 1) {
         this.tableData.splice(index, 1)
@@ -124,11 +119,12 @@ export default {
     },
     handleAddLine () {
       this.tableData.push({
-        relationship: '', // 本人关系
-        name: '',
-        birth: '', // 出生年月
-        politicsStatus: '',
-        work: ''
+        title: '', // 称谓
+        name: '', // 姓名
+        time: '', // 被追究时间
+        reasons: '', // 被追究责任原因
+        status: '', // 处理阶段
+        result: '' // 处理结果
       })
     }
   }

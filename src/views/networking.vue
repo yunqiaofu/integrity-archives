@@ -19,24 +19,12 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="年度"
-      width="180"
-    >
-      <template scope="scope">
-        <el-input
-          v-model="scope.row.time"
-          size="small"
-          placeholder="请输入内容"
-        />
-      </template>
-    </el-table-column>
-    <el-table-column
-      label="考核情况"
+      label="本人关系"
       width="180"
     >
       <template scope="scope">
         <el-select
-          v-model="scope.row.assessment"
+          v-model="scope.row.relationship"
           placeholder="请选择"
         >
           <el-option
@@ -49,36 +37,54 @@
       </template>
     </el-table-column>
     <el-table-column
-      prop="agency"
-      label="发文机关"
+      label="姓名"
+      width="180"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.agency"
+          v-model="scope.row.name"
           size="small"
           placeholder="请输入内容"
         />
       </template>
     </el-table-column>
     <el-table-column
-      prop="symbol"
-      label="文号"
+      label="出生年月"
+      width="180"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.symbol"
+          v-model="scope.row.birth"
           size="small"
           placeholder="请输入内容"
         />
       </template>
     </el-table-column>
     <el-table-column
-      prop="agency"
-      label="备注"
+      prop="politicsStatus"
+      label="政治面貌"
+    >
+      <template scope="scope">
+        <el-select
+          v-model="scope.row.politicsStatus"
+          placeholder="请选择"
+        >
+          <el-option
+            v-for="item in $utils.politicsStatus"
+            :key="item"
+            :label="item"
+            :value="item"
+          />
+        </el-select>
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="work"
+      label="工作单位及职务"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.desc"
+          v-model="scope.row.work"
           size="small"
           placeholder="请输入内容"
         />
@@ -102,16 +108,10 @@ export default {
   },
   computed: {
     tableData () {
-      return this.$store.getters.getNetworking
+      return this.$store.getters.getWorkAssessment
     }
   },
   methods: {
-    // handleCurrentChange (row, event, column) {
-    //   console.log(row, event, column, event.currentTarget)
-    // },
-    // handleEdit (index, row) {
-    //   console.log(index, row)
-    // },
     handleDelete (index, row) {
       if (this.tableData.length > 1) {
         this.tableData.splice(index, 1)
@@ -124,11 +124,11 @@ export default {
     },
     handleAddLine () {
       this.tableData.push({
-        relationship: '', // 本人关系
-        name: '',
-        birth: '', // 出生年月
-        politicsStatus: '',
-        work: ''
+        time: '', // 年度
+        assessment: '', // 考核情况
+        agency: '', // 发文机关
+        symbol: '', // 文号
+        desc: ''// 备注
       })
     }
   }

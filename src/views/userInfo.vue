@@ -171,8 +171,8 @@
             :autosize="{ minRows: 2, maxRows: 6 }"
           />
         </el-form-item>
-        <!--
-        <el-form-item>
+
+        <!-- <el-form-item>
           <el-button
             type="primary"
             @click="onSubmit"
@@ -183,25 +183,16 @@
         </el-form-item> -->
       </el-form>
     </div>
-    <div
-      class="home-button app-action-button"
-      @click="loadAsyncZip"
-    >
-      读取文件
-    </div>
-    <div
-      class="home-button app-action-button"
-      @click="downloadZip"
-    >
-      下载
-    </div>
+    <networking />
   </div>
 </template>
 
 <script>
+import networking from './networking'
 var JSZip = require('jszip')
 const fs = require('fs')
 export default {
+  components: { networking },
   data () {
     var validatePass = (rule, value, callback) => {
       if (value === '') {
@@ -233,6 +224,27 @@ export default {
     form () {
       return this.$store.getters.getUser
     }
+  },
+  mounted () {
+    // 监听与主进程的通信
+    this.$ipc.on('action', (event, arg) => {
+      switch (arg) {
+        case 'open': // 打开文件
+          console.log('open')
+          this.loadAsyncZip()
+          break
+        case 'about': // 关于
+          console.log('about')
+          break
+        case 'save': // 保存
+          this.downloadZip()
+          break
+        case 'newSave': // 另存为
+          this.downloadZip()
+          console.log('newSave')
+          break
+      }
+    })
   },
   methods: {
     openDialogByRemote () {
@@ -284,8 +296,8 @@ export default {
       var zip = new JSZip()
       // 创建一个被用来打包的文件
       zip.file('user.json', JSON.stringify(this.form))
-      if (this.form.pass) {
-        zip.file('password', this.form.pass)
+      if (this.form.password) {
+        zip.file('password', this.form.password)
       }
       // 创建一个名为images的新的文件目录
       // var img = zip.folder('images')
@@ -390,6 +402,8 @@ export default {
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  height: 260px;
+  line-height: 260px;
 }
 .avatar-uploader:hover {
   border-color: #409eff;

@@ -19,66 +19,91 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="年度"
+      label="产权人"
       width="180"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.time"
+          v-model="scope.row.people"
           size="small"
           placeholder="请输入内容"
         />
       </template>
     </el-table-column>
     <el-table-column
-      label="考核情况"
+      label="与本人关系"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.relationship"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="organization"
+      label="房产来源(去向)"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.source"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="具体地址"
       width="180"
     >
       <template scope="scope">
-        <el-select
-          v-model="scope.row.assessment"
-          placeholder="请选择"
-        >
-          <el-option
-            v-for="item in $utils.nation"
-            :key="item"
-            :label="item"
-            :value="item"
-          />
-        </el-select>
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="agency"
-      label="发文机关"
-    >
-      <template scope="scope">
         <el-input
-          v-model="scope.row.agency"
+          v-model="scope.row.address"
           size="small"
           placeholder="请输入内容"
         />
       </template>
     </el-table-column>
     <el-table-column
-      prop="symbol"
-      label="文号"
+      label="建筑面积(m²)"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.symbol"
+          v-model="scope.row.area"
           size="small"
           placeholder="请输入内容"
         />
       </template>
     </el-table-column>
     <el-table-column
-      prop="agency"
-      label="备注"
+      label="产权性质"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.desc"
+          v-model="scope.row.propertyNature"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="交易时间"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.transactionTime"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="交易价格(万)"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.transactionPrice"
           size="small"
           placeholder="请输入内容"
         />
@@ -102,16 +127,10 @@ export default {
   },
   computed: {
     tableData () {
-      return this.$store.getters.getNetworking
+      return this.$store.getters.getRecommendation
     }
   },
   methods: {
-    // handleCurrentChange (row, event, column) {
-    //   console.log(row, event, column, event.currentTarget)
-    // },
-    // handleEdit (index, row) {
-    //   console.log(index, row)
-    // },
     handleDelete (index, row) {
       if (this.tableData.length > 1) {
         this.tableData.splice(index, 1)
@@ -124,11 +143,14 @@ export default {
     },
     handleAddLine () {
       this.tableData.push({
-        relationship: '', // 本人关系
-        name: '',
-        birth: '', // 出生年月
-        politicsStatus: '',
-        work: ''
+        people: '', // 产权人
+        relationship: '', // 与本人关系
+        source: '', // 房产来源
+        address: '', // 具体地址
+        area: '', // 建筑面积
+        propertyNature: '', // 产权性质
+        transactionTime: '', // 交易时间
+        transactionPrice: '' // 交易价格
       })
     }
   }

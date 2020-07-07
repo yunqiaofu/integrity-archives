@@ -19,66 +19,89 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="年度"
+      label="称谓"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.title"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="姓名"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.name"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="是否共同生活"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.isLife"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="工作、学习单位"
       width="180"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.time"
+          v-model="scope.row.work"
           size="small"
           placeholder="请输入内容"
         />
       </template>
     </el-table-column>
     <el-table-column
-      label="考核情况"
-      width="180"
-    >
-      <template scope="scope">
-        <el-select
-          v-model="scope.row.assessment"
-          placeholder="请选择"
-        >
-          <el-option
-            v-for="item in $utils.nation"
-            :key="item"
-            :label="item"
-            :value="item"
-          />
-        </el-select>
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="agency"
-      label="发文机关"
+      label="现任职务"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.agency"
+          v-model="scope.row.duty"
           size="small"
           placeholder="请输入内容"
         />
       </template>
     </el-table-column>
     <el-table-column
-      prop="symbol"
-      label="文号"
+      label="单位性质"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.symbol"
+          v-model="scope.row.unitNature"
           size="small"
           placeholder="请输入内容"
         />
       </template>
     </el-table-column>
     <el-table-column
-      prop="agency"
-      label="备注"
+      label="证件名称"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.desc"
+          v-model="scope.row.cardName"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="证件号码"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.card"
           size="small"
           placeholder="请输入内容"
         />
@@ -102,16 +125,10 @@ export default {
   },
   computed: {
     tableData () {
-      return this.$store.getters.getNetworking
+      return this.$store.getters.getPractice
     }
   },
   methods: {
-    // handleCurrentChange (row, event, column) {
-    //   console.log(row, event, column, event.currentTarget)
-    // },
-    // handleEdit (index, row) {
-    //   console.log(index, row)
-    // },
     handleDelete (index, row) {
       if (this.tableData.length > 1) {
         this.tableData.splice(index, 1)
@@ -124,11 +141,14 @@ export default {
     },
     handleAddLine () {
       this.tableData.push({
-        relationship: '', // 本人关系
-        name: '',
-        birth: '', // 出生年月
-        politicsStatus: '',
-        work: ''
+        title: '', // 称谓
+        name: '', // 姓名
+        IsLife: '', // 是否共同生活
+        work: '', // 工作单位
+        duty: '', // 现在职务
+        UnitNature: '', // 单位性质
+        cardName: '', // 证件名称
+        card: '' // 证件号码
       })
     }
   }

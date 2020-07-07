@@ -19,8 +19,42 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="年度"
+      label="证件名称"
       width="180"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.name"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="证件号码"
+      width="180"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.number"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="发证机关"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.Licensing"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="发证时间"
     >
       <template scope="scope">
         <el-input
@@ -31,54 +65,22 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="考核情况"
-      width="180"
-    >
-      <template scope="scope">
-        <el-select
-          v-model="scope.row.assessment"
-          placeholder="请选择"
-        >
-          <el-option
-            v-for="item in $utils.nation"
-            :key="item"
-            :label="item"
-            :value="item"
-          />
-        </el-select>
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="agency"
-      label="发文机关"
+      label="有效期"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.agency"
+          v-model="scope.row.validity"
           size="small"
           placeholder="请输入内容"
         />
       </template>
     </el-table-column>
     <el-table-column
-      prop="symbol"
-      label="文号"
+      label="保管机构"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.symbol"
-          size="small"
-          placeholder="请输入内容"
-        />
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="agency"
-      label="备注"
-    >
-      <template scope="scope">
-        <el-input
-          v-model="scope.row.desc"
+          v-model="scope.row.custodyInstitutions"
           size="small"
           placeholder="请输入内容"
         />
@@ -102,16 +104,10 @@ export default {
   },
   computed: {
     tableData () {
-      return this.$store.getters.getNetworking
+      return this.$store.getters.getTravelDocuments
     }
   },
   methods: {
-    // handleCurrentChange (row, event, column) {
-    //   console.log(row, event, column, event.currentTarget)
-    // },
-    // handleEdit (index, row) {
-    //   console.log(index, row)
-    // },
     handleDelete (index, row) {
       if (this.tableData.length > 1) {
         this.tableData.splice(index, 1)
@@ -124,11 +120,12 @@ export default {
     },
     handleAddLine () {
       this.tableData.push({
-        relationship: '', // 本人关系
-        name: '',
-        birth: '', // 出生年月
-        politicsStatus: '',
-        work: ''
+        name: '', // 证件名称
+        number: '', // 证件号码
+        Licensing: '', // 发证机关
+        time: '', // 发证时间
+        validity: '', // 有效期
+        custodyInstitutions: ''// 保管机构
       })
     }
   }

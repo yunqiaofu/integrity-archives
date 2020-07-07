@@ -22,7 +22,7 @@ export default new Vuex.Store({
       password: '',
       checkPassword: '',
       imageUrl: '', // 照片
-      other: '',
+      other: '11',
       // 人脉关系
       networking: [
         {
@@ -58,7 +58,7 @@ export default new Vuex.Store({
         time: '',
         disposition: '', // 所受处分
         dispositionReasons: '', // 所受处分原因
-        dispositionOrgans: '', // 所受处分机关
+        dispositionOrgans: '', // 惩处机关
         symbol: '', // 文号
         desc: ''
       }],
@@ -113,6 +113,7 @@ export default new Vuex.Store({
         country: '', // 移居国家
         city: '', // 居住城市
         card: '', // 移居国家证件号码
+        type: '', // 移居类别
         time: '', // 移居时间
         desc: ''
       }],
@@ -120,10 +121,10 @@ export default new Vuex.Store({
       practice: [{
         title: '', // 称谓
         name: '', // 姓名
-        IsLife: '', // 是否共同生活
+        isLife: '', // 是否共同生活
         work: '', // 工作单位
         duty: '', // 现在职务
-        UnitNature: '', // 单位性质
+        unitNature: '', // 单位性质
         cardName: '', // 证件名称
         card: '' // 证件号码
       }],
@@ -173,11 +174,62 @@ export default new Vuex.Store({
     // 参数列表state指的是state数据
     getUser (state) {
       return state.user
+    },
+    getOther ({ user }) {
+      return user.other
+    },
+    getNetworking ({ user }) {
+      return user.networking
+    },
+    getWorkAssessment ({ user }) {
+      return user.workAssessment
+    },
+    getRecommendation ({ user }) {
+      return user.recommendation
+    },
+    getPunishment ({ user }) {
+      return user.punishment
+    },
+    getMarriage ({ user }) {
+      return user.marriage
+    },
+    getTravelDocuments ({ user }) {
+      return user.travelDocuments
+    },
+    getTravelAbroad ({ user }) {
+      return user.travelAbroad
+    },
+    getChildMarriageForeigners ({ user }) {
+      return user.childMarriageForeigners
+    },
+    getChildMarriageTaiwan ({ user }) {
+      return user.childMarriageTaiwan
+    },
+    getChildMoved ({ user }) {
+      return user.childMoved
+    },
+    getPractice ({ user }) {
+      return user.practice
+    },
+    getCriminal ({ user }) {
+      return user.criminal
+    },
+    getRealEstate ({ user }) {
+      return user.realEstate
+    },
+    getPartnership ({ user }) {
+      return user.partnership
+    },
+    getCar ({ user }) {
+      return user.car
     }
   },
   mutations: {
     setUser (state, user) {
       state.user = user// 将传参设置给state的city
+    },
+    setOther (state, other) {
+      state.user.other = other// 将传参设置给state的city
     }
   },
   actions: {
@@ -185,6 +237,11 @@ export default new Vuex.Store({
       // 跟后台打交道
       // 调用mutaions里面的方法
       commit('setUser', user)
+    },
+    updateOther ({ commit, state }, other) {
+      // 跟后台打交道
+      // 调用mutaions里面的方法
+      commit('setOther', other)
     }
   },
   modules: {}

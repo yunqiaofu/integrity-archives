@@ -19,66 +19,68 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="年度"
+      label="起止日期(起)"
       width="180"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.time"
+          v-model="scope.row.startTime"
           size="small"
           placeholder="请输入内容"
         />
       </template>
     </el-table-column>
     <el-table-column
-      label="考核情况"
+      label="起止日期(止)"
       width="180"
     >
       <template scope="scope">
-        <el-select
-          v-model="scope.row.assessment"
-          placeholder="请选择"
-        >
-          <el-option
-            v-for="item in $utils.nation"
-            :key="item"
-            :label="item"
-            :value="item"
-          />
-        </el-select>
+        <el-input
+          v-model="scope.row.endTime"
+          size="small"
+          placeholder="请输入内容"
+        />
       </template>
     </el-table-column>
     <el-table-column
-      prop="agency"
-      label="发文机关"
+      label="所到国家(地区)"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.country"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="出国(境)事由"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.reasons"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="审批机构"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.approvalAuthority"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="委托代办机构"
     >
       <template scope="scope">
         <el-input
           v-model="scope.row.agency"
-          size="small"
-          placeholder="请输入内容"
-        />
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="symbol"
-      label="文号"
-    >
-      <template scope="scope">
-        <el-input
-          v-model="scope.row.symbol"
-          size="small"
-          placeholder="请输入内容"
-        />
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="agency"
-      label="备注"
-    >
-      <template scope="scope">
-        <el-input
-          v-model="scope.row.desc"
           size="small"
           placeholder="请输入内容"
         />
@@ -102,16 +104,10 @@ export default {
   },
   computed: {
     tableData () {
-      return this.$store.getters.getNetworking
+      return this.$store.getters.getTravelAbroad
     }
   },
   methods: {
-    // handleCurrentChange (row, event, column) {
-    //   console.log(row, event, column, event.currentTarget)
-    // },
-    // handleEdit (index, row) {
-    //   console.log(index, row)
-    // },
     handleDelete (index, row) {
       if (this.tableData.length > 1) {
         this.tableData.splice(index, 1)
@@ -124,11 +120,12 @@ export default {
     },
     handleAddLine () {
       this.tableData.push({
-        relationship: '', // 本人关系
-        name: '',
-        birth: '', // 出生年月
-        politicsStatus: '',
-        work: ''
+        startTime: '',
+        endTime: '',
+        country: '',
+        reasons: '', // 出国事由
+        approvalAuthority: '', // 审批机构
+        agency: ''// 代办机构
       })
     }
   }

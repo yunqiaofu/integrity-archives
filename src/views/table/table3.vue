@@ -19,7 +19,7 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="年度"
+      label="受惩处时间"
       width="180"
     >
       <template scope="scope">
@@ -31,30 +31,36 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="考核情况"
+      label="所受处分"
       width="180"
     >
       <template scope="scope">
-        <el-select
-          v-model="scope.row.assessment"
-          placeholder="请选择"
-        >
-          <el-option
-            v-for="item in $utils.nation"
-            :key="item"
-            :label="item"
-            :value="item"
-          />
-        </el-select>
+        <el-input
+          v-model="scope.row.disposition"
+          size="small"
+          placeholder="请输入内容"
+        />
       </template>
     </el-table-column>
     <el-table-column
-      prop="agency"
-      label="发文机关"
+      prop="organization"
+      label="受处分原因"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.agency"
+          v-model="scope.row.dispositionReasons"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="dispositionOrgans"
+      label="惩处机关"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.dispositionOrgans"
           size="small"
           placeholder="请输入内容"
         />
@@ -102,16 +108,10 @@ export default {
   },
   computed: {
     tableData () {
-      return this.$store.getters.getNetworking
+      return this.$store.getters.getPunishment
     }
   },
   methods: {
-    // handleCurrentChange (row, event, column) {
-    //   console.log(row, event, column, event.currentTarget)
-    // },
-    // handleEdit (index, row) {
-    //   console.log(index, row)
-    // },
     handleDelete (index, row) {
       if (this.tableData.length > 1) {
         this.tableData.splice(index, 1)
@@ -124,11 +124,12 @@ export default {
     },
     handleAddLine () {
       this.tableData.push({
-        relationship: '', // 本人关系
-        name: '',
-        birth: '', // 出生年月
-        politicsStatus: '',
-        work: ''
+        time: '',
+        disposition: '', // 所受处分
+        dispositionReasons: '', // 所受处分原因
+        dispositionOrgans: '', // 所受处分机关
+        symbol: '', // 文号
+        desc: ''
       })
     }
   }

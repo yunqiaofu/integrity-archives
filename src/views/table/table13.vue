@@ -19,66 +19,90 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="年度"
+      label="称谓"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.title"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="姓名"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.name"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="市场主体名称"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.marketSubject"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="经营范围(业务范围)"
       width="180"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.time"
+          v-model="scope.row.businessScope"
           size="small"
           placeholder="请输入内容"
         />
       </template>
     </el-table-column>
     <el-table-column
-      label="考核情况"
+      label="市场主体类型"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.marketSubjectType"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="资金数额(出资额)(万元)"
       width="180"
     >
       <template scope="scope">
-        <el-select
-          v-model="scope.row.assessment"
-          placeholder="请选择"
-        >
-          <el-option
-            v-for="item in $utils.nation"
-            :key="item"
-            :label="item"
-            :value="item"
-          />
-        </el-select>
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="agency"
-      label="发文机关"
-    >
-      <template scope="scope">
         <el-input
-          v-model="scope.row.agency"
+          v-model="scope.row.money"
           size="small"
           placeholder="请输入内容"
         />
       </template>
     </el-table-column>
     <el-table-column
-      prop="symbol"
-      label="文号"
+      label="个人出资额(万)"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.symbol"
+          v-model="scope.row.personalContribution"
           size="small"
           placeholder="请输入内容"
         />
       </template>
     </el-table-column>
     <el-table-column
-      prop="agency"
-      label="备注"
+      label="出资比例(%)"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.desc"
+          v-model="scope.row.fundedRatio"
           size="small"
           placeholder="请输入内容"
         />
@@ -102,16 +126,10 @@ export default {
   },
   computed: {
     tableData () {
-      return this.$store.getters.getNetworking
+      return this.$store.getters.getPartnership
     }
   },
   methods: {
-    // handleCurrentChange (row, event, column) {
-    //   console.log(row, event, column, event.currentTarget)
-    // },
-    // handleEdit (index, row) {
-    //   console.log(index, row)
-    // },
     handleDelete (index, row) {
       if (this.tableData.length > 1) {
         this.tableData.splice(index, 1)
@@ -124,11 +142,14 @@ export default {
     },
     handleAddLine () {
       this.tableData.push({
-        relationship: '', // 本人关系
+        title: '', // 称谓
         name: '',
-        birth: '', // 出生年月
-        politicsStatus: '',
-        work: ''
+        marketSubject: '', // 市场主体
+        businessScope: '', // 经营范围
+        marketSubjectType: '', // 市场主体类型
+        money: '', // 资金数额
+        personalContribution: '', // 个人出资数额
+        fundedRatio: '' // 出资比例
       })
     }
   }
