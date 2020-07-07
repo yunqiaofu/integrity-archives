@@ -10,10 +10,9 @@ matrix:
   include:
     - os: linux
       before_install: # 为了支持打包rpm格式的包
-          - sudo add-apt-repository ppa:snappy-dev/tools
           - sudo apt-get update
-          - sudo apt-get install -y snapd
-          - sudo apt-get install snapcraft
+          - sudo apt-get install snapd -y
+          - sudo snap install snapcraft --classic
           - sudo snap refresh
           - sudo snap install snapcraft --classic
           - sudo apt-get install --no-install-recommends -y gcc-multilib g++-multilib
@@ -26,6 +25,7 @@ cache:
 
 install:
   - npm install
+  - npm install --save-dev electron-installer-snap
 
 script:
   - npm run lint
