@@ -33,7 +33,7 @@ class MainWindow {
         height: 770,
         minWidth: 1200,
         minHeight: 770,
-        title: '廉情信息报告表',
+        title: '廉情信息补填表',
         webPreferences: {
           // 设为false允许跨域
           webSecurity: false,
@@ -56,7 +56,7 @@ class MainWindow {
     // if (process.platform === 'darwin') {
     const template = [
       {
-        label: '廉情信息报告表',
+        label: '廉情信息补填表',
         submenu: [
           {
             label: `关于${app.getName()}`,
