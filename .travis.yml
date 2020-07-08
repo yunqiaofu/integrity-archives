@@ -10,11 +10,11 @@ matrix:
   include:
     - os: linux
       before_install: # 为了支持打包rpm格式的包
-          - sudo add-apt-repository ppa:snappy-dev/tools -y
           - sudo apt-get update
-          - sudo apt-get install snapd -y
-          - sudo snap refresh
-          - sudo snap install snapcraft --edge --classic
+          - sudo apt-get install build-essential clang libdbus-1-dev libgtk2.0-dev \
+                                  libnotify-dev libgnome-keyring-dev libgconf2-dev \
+                                  libasound2-dev libcap-dev libcups2-dev libxtst-dev \
+                                  libxss1 libnss3-dev gcc-multilib g++-multilib
           # - sudo apt-get install --no-install-recommends -y gcc-multilib g++-multilib
           # - sudo apt-get install --no-install-recommends -y rpm
     - os: osx
