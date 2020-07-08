@@ -19,16 +19,16 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="本人关系"
+      label="称谓"
       width="180"
     >
       <template scope="scope">
         <el-select
-          v-model="scope.row.relationship"
+          v-model="scope.row.title"
           placeholder="请选择"
         >
           <el-option
-            v-for="item in list"
+            v-for="item in $utils.childrenType"
             :key="item.key"
             :label="item.value"
             :value="item.key"
@@ -49,42 +49,63 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="政治面貌"
-    >
-      <template scope="scope">
-        <el-select
-          v-model="scope.row.politicsStatus"
-          placeholder="请选择"
-        >
-          <el-option
-            v-for="(item,i) in $utils.politicsStatus"
-            :key="item"
-            :label="item"
-            :value="i"
-          />
-        </el-select>
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="work"
-      label="工作单位及职务"
+      prop="organization"
+      label="配偶姓名"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.work"
+          v-model="scope.row.spouseName"
           size="small"
           placeholder="请输入内容"
         />
       </template>
     </el-table-column>
     <el-table-column
-      label="联系电话"
+      prop="symbol"
+      label="配偶国籍(地区)"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.phone"
+          v-model="scope.row.spouseCountry"
           size="small"
           placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="配偶工作(学习)单位"
+      width="180"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.spouseWork"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="配偶职务"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.spouseDuty"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="登记时间"
+      width="180"
+    >
+      <template scope="scope">
+        <el-date-picker
+          v-model="scope.row.time"
+          style="width:150px"
+          type="date"
+          value-format="timestamp"
+          placeholder="选择时间"
         />
       </template>
     </el-table-column>
@@ -106,14 +127,7 @@ export default {
   },
   computed: {
     tableData () {
-      return this.$store.getters.getNetworking
-    },
-    list () {
-      if (this.$store.getters.getUser.gender === '2') {
-        return this.$utils.womenRelationship
-      } else {
-        return this.$utils.manRelationship
-      }
+      return this.$store.getters.getChildMarriageForeigners
     }
   },
   methods: {
@@ -129,11 +143,13 @@ export default {
     },
     handleAddLine () {
       this.tableData.push({
-        relationship: '', // 本人关系
-        name: '',
-        politicsStatus: '', // 政治面貌
-        phone: '',
-        work: ''
+        title: '', // 称谓
+        name: '', // 姓名
+        spouseName: '', // 配偶姓名
+        spouseCountry: '', // 配偶姓名国籍
+        spouseWork: '', // 配偶单位
+        spouseDuty: '', // 配偶职位
+        time: ''// 登记时间
       })
     }
   }

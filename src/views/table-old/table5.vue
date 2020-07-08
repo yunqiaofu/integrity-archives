@@ -19,16 +19,16 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="本人关系"
+      label="证件名称"
       width="180"
     >
       <template scope="scope">
         <el-select
-          v-model="scope.row.relationship"
+          v-model="scope.row.name"
           placeholder="请选择"
         >
           <el-option
-            v-for="item in list"
+            v-for="item in $utils.identification"
             :key="item.key"
             :label="item.value"
             :value="item.key"
@@ -37,52 +37,59 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="姓名"
+      label="证件号码"
       width="180"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.name"
+          v-model="scope.row.number"
           size="small"
           placeholder="请输入内容"
         />
       </template>
     </el-table-column>
     <el-table-column
-      label="政治面貌"
-    >
-      <template scope="scope">
-        <el-select
-          v-model="scope.row.politicsStatus"
-          placeholder="请选择"
-        >
-          <el-option
-            v-for="(item,i) in $utils.politicsStatus"
-            :key="item"
-            :label="item"
-            :value="i"
-          />
-        </el-select>
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="work"
-      label="工作单位及职务"
+      label="发证机关"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.work"
+          v-model="scope.row.Licensing"
           size="small"
           placeholder="请输入内容"
         />
       </template>
     </el-table-column>
     <el-table-column
-      label="联系电话"
+      label="发证时间"
+      width="180"
+    >
+      <template scope="scope">
+        <el-date-picker
+          v-model="scope.row.time"
+          style="width:150px"
+          type="date"
+          value-format="timestamp"
+          placeholder="选择时间"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="有效期"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.phone"
+          v-model="scope.row.validity"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="保管机构"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.custodyInstitutions"
           size="small"
           placeholder="请输入内容"
         />
@@ -106,14 +113,7 @@ export default {
   },
   computed: {
     tableData () {
-      return this.$store.getters.getNetworking
-    },
-    list () {
-      if (this.$store.getters.getUser.gender === '2') {
-        return this.$utils.womenRelationship
-      } else {
-        return this.$utils.manRelationship
-      }
+      return this.$store.getters.getTravelDocuments
     }
   },
   methods: {
@@ -129,11 +129,12 @@ export default {
     },
     handleAddLine () {
       this.tableData.push({
-        relationship: '', // 本人关系
-        name: '',
-        politicsStatus: '', // 政治面貌
-        phone: '',
-        work: ''
+        name: '', // 证件名称
+        number: '', // 证件号码
+        Licensing: '', // 发证机关
+        time: '', // 发证时间
+        validity: '', // 有效期
+        custodyInstitutions: ''// 保管机构
       })
     }
   }

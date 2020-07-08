@@ -22,6 +22,7 @@ Vue.prototype.$dialog = dialog
 Vue.prototype.$db = db
 Vue.prototype.$utils = utils
 Vue.config.productionTip = false
+ElementUI.Input.props.clearable.default = true
 Vue.use(ElementUI, { size: 'mini' })
 // Navigation guard (interceptor) , executes code before each jump of the router
 // 导航守卫（拦截器），在router每次跳转前执行

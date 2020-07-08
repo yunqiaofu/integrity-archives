@@ -19,25 +19,21 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="本人关系"
+      label="时间"
       width="180"
     >
       <template scope="scope">
-        <el-select
-          v-model="scope.row.relationship"
-          placeholder="请选择"
-        >
-          <el-option
-            v-for="item in list"
-            :key="item.key"
-            :label="item.value"
-            :value="item.key"
-          />
-        </el-select>
+        <el-date-picker
+          v-model="scope.row.time"
+          style="width:150px"
+          type="date"
+          value-format="timestamp"
+          placeholder="选择时间"
+        />
       </template>
     </el-table-column>
     <el-table-column
-      label="姓名"
+      label="名称"
       width="180"
     >
       <template scope="scope">
@@ -49,40 +45,36 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="政治面貌"
-    >
-      <template scope="scope">
-        <el-select
-          v-model="scope.row.politicsStatus"
-          placeholder="请选择"
-        >
-          <el-option
-            v-for="(item,i) in $utils.politicsStatus"
-            :key="item"
-            :label="item"
-            :value="i"
-          />
-        </el-select>
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="work"
-      label="工作单位及职务"
+      prop="organization"
+      label="表彰机关"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.work"
+          v-model="scope.row.organization"
           size="small"
           placeholder="请输入内容"
         />
       </template>
     </el-table-column>
     <el-table-column
-      label="联系电话"
+      prop="symbol"
+      label="文号"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.phone"
+          v-model="scope.row.symbol"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="agency"
+      label="备注"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.desc"
           size="small"
           placeholder="请输入内容"
         />
@@ -106,14 +98,7 @@ export default {
   },
   computed: {
     tableData () {
-      return this.$store.getters.getNetworking
-    },
-    list () {
-      if (this.$store.getters.getUser.gender === '2') {
-        return this.$utils.womenRelationship
-      } else {
-        return this.$utils.manRelationship
-      }
+      return this.$store.getters.getRecommendation
     }
   },
   methods: {
@@ -129,11 +114,11 @@ export default {
     },
     handleAddLine () {
       this.tableData.push({
-        relationship: '', // 本人关系
+        time: '',
         name: '',
-        politicsStatus: '', // 政治面貌
-        phone: '',
-        work: ''
+        organization: '', // 表彰机关
+        symbol: '', // 文号
+        desc: ''// 备注
       })
     }
   }

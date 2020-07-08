@@ -1,11 +1,12 @@
 <template>
   <div style="text-align: center;">
+    <h2>报告人基本情况</h2>
     <div>
       <el-form
         ref="form"
         :model="form"
         :rules="rules"
-        label-width="80px"
+        label-width="120px"
       >
         <el-row :gutter="0">
           <el-col :span="6">
@@ -14,14 +15,28 @@
             </el-form-item>
           </el-col>
           <el-col :span="6">
-            <el-form-item label="身份证号">
-              <el-input v-model="form.idCard" />
+            <el-form-item label="性别">
+              <el-select
+                v-model="form.gender"
+                clearable
+                filterable
+                placeholder="请选择"
+              >
+                <el-option
+                  v-for="(item,i) in $utils.gender"
+                  :key="item"
+                  :label="item"
+                  :value="i"
+                />
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :span="6">
             <el-form-item label="民族">
               <el-select
                 v-model="form.nation"
+                clearable
+                filterable
                 placeholder="请选择"
               >
                 <el-option
@@ -37,6 +52,8 @@
             <el-form-item label="政治面貌">
               <el-select
                 v-model="form.politicsStatus"
+                clearable
+                filterable
                 placeholder="请选择"
               >
                 <el-option
@@ -48,9 +65,70 @@
               </el-select>
             </el-form-item>
           </el-col>
+          <el-col :span="6">
+            <el-form-item label="在职状态">
+              <el-select
+                v-model="form.workingStatus"
+                clearable
+                placeholder="请选择"
+              >
+                <el-option
+                  v-for="(item,i) in $utils.workingStatus"
+                  :key="item"
+                  :label="item"
+                  :value="i"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="9">
+            <el-form-item
+              label="密码"
+              prop="password"
+            >
+              <el-input
+                v-model="form.password"
+                :type="passType?'password':'text'"
+                autocomplete="off"
+              >
+                <el-button
+                  slot="append"
+                  icon="el-icon-view"
+                  @click="passType=!passType"
+                />
+              </el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="9">
+            <el-form-item
+              label="确认密码"
+              prop="checkPassword"
+            >
+              <el-input
+                v-model="form.checkPassword"
+                :type="checkPassType?'password':'text'"
+                autocomplete="off"
+              >
+                <el-button
+                  slot="append"
+                  icon="el-icon-view"
+                  @click="checkPassType=!checkPassType"
+                />
+              </el-input>
+            </el-form-item>
+          </el-col>
         </el-row>
+        <el-form-item label="从事或分管工作">
+          <el-input v-model="form.work" />
+        </el-form-item>
+        <el-form-item label="身份证号">
+          <el-input v-model="form.idCard" />
+        </el-form-item>
+        <el-form-item label="住址">
+          <el-input v-model="form.currentResidence" />
+        </el-form-item>
 
-        <el-row :gutter="10">
+        <!-- <el-row :gutter="10">
           <el-col :span="20">
             <el-row>
               <el-col :span="12">
@@ -67,7 +145,6 @@
                       :value="item.key"
                     />
                   </el-select>
-                  <!-- <el-input v-model="form.work" /> -->
                 </el-form-item>
                 <el-form-item label="现任职务">
                   <el-input v-model="form.duty" />
@@ -103,42 +180,6 @@
             <el-form-item label="现居住地">
               <el-input v-model="form.currentResidence" />
             </el-form-item>
-            <el-col :span="12">
-              <el-form-item
-                label="密码"
-                prop="password"
-              >
-                <el-input
-                  v-model="form.password"
-                  :type="passType?'password':'text'"
-                  autocomplete="off"
-                >
-                  <el-button
-                    slot="append"
-                    icon="el-icon-view"
-                    @click="passType=!passType"
-                  />
-                </el-input>
-              </el-form-item>
-            </el-col>
-            <el-col :span="12">
-              <el-form-item
-                label="确认密码"
-                prop="checkPassword"
-              >
-                <el-input
-                  v-model="form.checkPassword"
-                  :type="checkPassType?'password':'text'"
-                  autocomplete="off"
-                >
-                  <el-button
-                    slot="append"
-                    icon="el-icon-view"
-                    @click="checkPassType=!checkPassType"
-                  />
-                </el-input>
-              </el-form-item>
-            </el-col>
           </el-col>
           <el-col :span="4">
             <input
@@ -177,7 +218,7 @@
             type="textarea"
             :autosize="{ minRows: 2, maxRows: 6 }"
           />
-        </el-form-item>
+        </el-form-item> -->
 
         <!-- <el-form-item>
           <el-button
@@ -190,17 +231,17 @@
         </el-form-item> -->
       </el-form>
     </div>
-    <networking />
+    <work />
   </div>
 </template>
 
 <script>
-import networking from './networking'
+import work from './work'
 import db from './../db.js'
 var JSZip = require('jszip')
 const fs = require('fs')
 export default {
-  components: { networking },
+  components: { work },
   data () {
     var validatePass = (rule, value, callback) => {
       if (value === '') {

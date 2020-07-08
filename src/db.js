@@ -1,10 +1,12 @@
 
 const db = {
   name: '',
-  idCard: '',
+  gender: '',
+  idCard: '', // 身份证号
+  workingStatus: '',
   nation: '', // 民族
   politicsStatus: '', // 政治面貌
-  work: '', // 工作单位
+  work: '', // 分管工作
   department: '', // 部门
   duty: '', // 现任职务
   partyTime: '', // 入党时间
@@ -17,13 +19,74 @@ const db = {
   checkPassword: '',
   imageUrl: '', // 照片
   other: '',
+  tableStatus: {},
+  // 未办证产权
+  notRushEstate: [{
+    people: '', // 产权人
+    relationship: '', // 与本人关系
+    source: '', // 房产来源
+    address: '', // 具体地址
+    area: '', // 建筑面积
+    propertyNature: '', // 产权性质
+    transactionTime: '', // 交易时间
+    transactionPrice: '' // 交易价格
+  }],
+  // 宅基地
+  homestead: [{
+    people: '', // 产权人
+    relationship: '', // 与本人关系
+    source: '', // 房产来源
+    address: '', // 具体地址
+    area: '', // 建筑面积
+    propertyNature: '', // 产权性质
+    transactionTime: '', // 交易时间
+    transactionPrice: '' // 交易价格
+  }],
+  // 股票
+  stock: {
+    desc: '',
+    allMarketValue: '', // 总市值
+    list: [{
+      name: '',
+      stockName: '', // 股票名称
+      stockNumber: '', // 股票数量
+      stockMarketValue: ''// 股票市值
+    }]
+  },
+  // 基金
+  fund: {
+    allMarketValue: '', // 总市值
+    list: [{
+      name: '',
+      fundName: '', // 基金名称
+      fundNumber: '', // 基金数量
+      fundMarketValue: ''// 基金市值
+    }]
+  },
+  // 期货
+  futures: {
+    allMarketValue: '', // 总市值
+    list: [{
+      name: '',
+      futuresName: '', // 期货名称
+      futuresNumber: '', // 期货数量
+      futuresMarketValue: ''// 期货市值
+    }]
+  },
+  workingList: [
+    {
+      employer: '', // 工作单位
+      duty: '', // 现任职务
+      phone: '' // 联系电话
+    }
+  ],
   // 人脉关系
   networking: [
     {
       relationship: '', // 本人关系
       name: '',
-      birth: '', // 出生年月
-      politicsStatus: '',
+      politicsStatus: '', // 政治面貌
+      phone: '',
       work: ''
     }
   ],

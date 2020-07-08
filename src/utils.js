@@ -1,3 +1,52 @@
+// 性别
+export const gender = {
+  1: '男',
+  2: '女'
+}
+// 在职状态
+export const workingStatus = {
+  1: '在职',
+  2: '退出现职尚未办理退休手续'
+}
+// 男的亲属关系
+export const manRelationship = [
+  { key: '01', value: '妻子' },
+  { key: '02', value: '儿女' },
+  { key: '03', value: '父母' },
+  { key: '04', value: '岳父母' },
+  { key: '05', value: '兄和兄嫂' },
+  { key: '06', value: '弟和弟媳' },
+  { key: '07', value: '姐和姐夫' },
+  { key: '08', value: '妹和妹夫' },
+  { key: '09', value: '妻兄和妻兄嫂' },
+  { key: '10', value: '妻弟和妻弟媳' },
+  { key: '11', value: '妻姐和妻姐夫' },
+  { key: '12', value: '妻妹和妻妹夫' },
+  { key: '13', value: '侄儿侄女' },
+  { key: '14', value: '外甥外甥女' },
+  { key: '15', value: '妻侄儿侄女' },
+  { key: '16', value: '妻外甥外甥女' }
+]
+// 女的亲属关系
+export const womenRelationship = [
+  { key: '01', value: '丈夫' },
+  { key: '02', value: '儿女' },
+  { key: '03', value: '父母' },
+  { key: '04', value: '公婆' },
+  { key: '05', value: '兄和兄嫂' },
+  { key: '06', value: '弟和弟媳' },
+  { key: '07', value: '姐和姐夫' },
+  { key: '08', value: '妹和妹夫' },
+  { key: '09', value: '夫兄和夫兄嫂' },
+  { key: '10', value: '夫弟和夫弟媳' },
+  { key: '11', value: '夫姐和夫姐夫' },
+  { key: '12', value: '夫妹和夫妹夫' },
+  { key: '13', value: '侄儿侄女' },
+  { key: '14', value: '外甥外甥女' },
+  { key: '15', value: '夫侄儿侄女' },
+  { key: '16', value: '夫外甥外甥女' }
+]
+
 // 身份枚举
 export const identity = {
   1: '区管干部',

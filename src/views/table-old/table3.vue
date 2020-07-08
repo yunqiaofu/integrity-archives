@@ -19,16 +19,30 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="本人关系"
+      label="受惩处时间"
+      width="180"
+    >
+      <template scope="scope">
+        <el-date-picker
+          v-model="scope.row.time"
+          style="width:150px"
+          type="date"
+          value-format="timestamp"
+          placeholder="选择时间"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="所受处分"
       width="180"
     >
       <template scope="scope">
         <el-select
-          v-model="scope.row.relationship"
+          v-model="scope.row.disposition"
           placeholder="请选择"
         >
           <el-option
-            v-for="item in $utils.relationship"
+            v-for="item in $utils.punishment"
             :key="item.key"
             :label="item.value"
             :value="item.key"
@@ -37,56 +51,48 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="姓名"
-      width="180"
+      prop="organization"
+      label="受处分原因"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.name"
+          v-model="scope.row.dispositionReasons"
           size="small"
           placeholder="请输入内容"
         />
       </template>
     </el-table-column>
     <el-table-column
-      label="出生年月"
-      width="180"
+      prop="dispositionOrgans"
+      label="惩处机关"
     >
       <template scope="scope">
-        <el-date-picker
-          v-model="scope.row.birth"
-          style="width:150px"
-          type="month"
-          value-format="timestamp"
-          placeholder="选择年月"
+        <el-input
+          v-model="scope.row.dispositionOrgans"
+          size="small"
+          placeholder="请输入内容"
         />
       </template>
     </el-table-column>
     <el-table-column
-      prop="politicsStatus"
-      label="政治面貌"
-    >
-      <template scope="scope">
-        <el-select
-          v-model="scope.row.politicsStatus"
-          placeholder="请选择"
-        >
-          <el-option
-            v-for="(item,i) in $utils.politicsStatus"
-            :key="item"
-            :label="item"
-            :value="i"
-          />
-        </el-select>
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="work"
-      label="工作单位及职务"
+      prop="symbol"
+      label="文号"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.work"
+          v-model="scope.row.symbol"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="agency"
+      label="备注"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.desc"
           size="small"
           placeholder="请输入内容"
         />
@@ -110,7 +116,7 @@ export default {
   },
   computed: {
     tableData () {
-      return this.$store.getters.getWorkAssessment
+      return this.$store.getters.getPunishment
     }
   },
   methods: {
@@ -126,11 +132,12 @@ export default {
     },
     handleAddLine () {
       this.tableData.push({
-        time: '', // 年度
-        assessment: '', // 考核情况
-        agency: '', // 发文机关
+        time: '',
+        disposition: '', // 所受处分
+        dispositionReasons: '', // 所受处分原因
+        dispositionOrgans: '', // 所受处分机关
         symbol: '', // 文号
-        desc: ''// 备注
+        desc: ''
       })
     }
   }

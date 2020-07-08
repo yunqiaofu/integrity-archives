@@ -19,16 +19,19 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="本人关系"
+      label="工作单位"
       width="180"
     >
       <template scope="scope">
         <el-select
-          v-model="scope.row.relationship"
+          v-model="scope.row.employer"
+          style="width:100%"
+          clearable
+          filterable
           placeholder="请选择"
         >
           <el-option
-            v-for="item in list"
+            v-for="item in $utils.workOrganization"
             :key="item.key"
             :label="item.value"
             :value="item.key"
@@ -37,41 +40,11 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="姓名"
-      width="180"
+      label="现任职务"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.name"
-          size="small"
-          placeholder="请输入内容"
-        />
-      </template>
-    </el-table-column>
-    <el-table-column
-      label="政治面貌"
-    >
-      <template scope="scope">
-        <el-select
-          v-model="scope.row.politicsStatus"
-          placeholder="请选择"
-        >
-          <el-option
-            v-for="(item,i) in $utils.politicsStatus"
-            :key="item"
-            :label="item"
-            :value="i"
-          />
-        </el-select>
-      </template>
-    </el-table-column>
-    <el-table-column
-      prop="work"
-      label="工作单位及职务"
-    >
-      <template scope="scope">
-        <el-input
-          v-model="scope.row.work"
+          v-model="scope.row.duty"
           size="small"
           placeholder="请输入内容"
         />
@@ -106,14 +79,7 @@ export default {
   },
   computed: {
     tableData () {
-      return this.$store.getters.getNetworking
-    },
-    list () {
-      if (this.$store.getters.getUser.gender === '2') {
-        return this.$utils.womenRelationship
-      } else {
-        return this.$utils.manRelationship
-      }
+      return this.$store.getters.getWorkingList
     }
   },
   methods: {
@@ -129,11 +95,9 @@ export default {
     },
     handleAddLine () {
       this.tableData.push({
-        relationship: '', // 本人关系
-        name: '',
-        politicsStatus: '', // 政治面貌
-        phone: '',
-        work: ''
+        employer: '', // 工作单位
+        duty: '', // 现任职务
+        phone: '' // 现任职务
       })
     }
   }

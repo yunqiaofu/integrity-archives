@@ -19,72 +19,46 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="起止日期(起)"
+      label="持有人姓名"
       width="180"
     >
       <template scope="scope">
-        <el-date-picker
-          v-model="scope.row.startTime"
-          style="width:150px"
-          type="date"
-          value-format="timestamp"
-          placeholder="选择时间"
+        <el-input
+          v-model="scope.row.name"
+          size="small"
+          placeholder="请输入内容"
         />
       </template>
     </el-table-column>
     <el-table-column
-      label="起止日期(止)"
+      label="期货名称或代码"
+    >
+      <template scope="scope">
+        <el-input
+          v-model="scope.row.futuresName"
+          size="small"
+          placeholder="请输入内容"
+        />
+      </template>
+    </el-table-column>
+    <el-table-column
+      label="持股数量"
       width="180"
     >
       <template scope="scope">
-        <el-date-picker
-          v-model="scope.row.endTime"
-          style="width:150px"
-          type="date"
-          value-format="timestamp"
-          placeholder="选择时间"
-        />
-      </template>
-    </el-table-column>
-    <el-table-column
-      label="所到国家(地区)"
-    >
-      <template scope="scope">
         <el-input
-          v-model="scope.row.country"
+          v-model="scope.row.futuresNumber"
           size="small"
           placeholder="请输入内容"
         />
       </template>
     </el-table-column>
     <el-table-column
-      label="出国(境)事由"
+      label="填报前一交易日市值（万元）"
     >
       <template scope="scope">
         <el-input
-          v-model="scope.row.reasons"
-          size="small"
-          placeholder="请输入内容"
-        />
-      </template>
-    </el-table-column>
-    <el-table-column
-      label="审批机构"
-    >
-      <template scope="scope">
-        <el-input
-          v-model="scope.row.approvalAuthority"
-          size="small"
-          placeholder="请输入内容"
-        />
-      </template>
-    </el-table-column>
-    <el-table-column
-      label="委托代办机构"
-    >
-      <template scope="scope">
-        <el-input
-          v-model="scope.row.agency"
+          v-model="scope.row.futuresMarketValue"
           size="small"
           placeholder="请输入内容"
         />
@@ -92,11 +66,24 @@
     </el-table-column>
     <div
       slot="append"
-      style="cursor: pointer;line-height: 30px;text-align:center;"
-      @click="handleAddLine"
+      style="cursor: pointer;line-height: 30px;"
     >
-      <i class="el-icon-circle-plus-outline" />
-      添加一行
+      <div style="text-align:right;border-bottom:1px solid #ebeef5;padding:5px">
+        填报前一交易日所有期货的总市值（万元）
+        <el-input
+          v-model="allMarketValue"
+          size="small"
+          style="width:400px"
+          placeholder="请输入内容"
+        />
+      </div>
+      <div
+        style="text-align:center;"
+        @click="handleAddLine"
+      >
+        <i class="el-icon-circle-plus-outline" />
+        添加一行
+      </div>
     </div>
   </el-table>
 </template>
@@ -108,7 +95,15 @@ export default {
   },
   computed: {
     tableData () {
-      return this.$store.getters.getTravelAbroad
+      return this.$store.getters.getFutures.list
+    },
+    allMarketValue: {
+      get: function () {
+        return this.$store.getters.getFutures.allMarketValue
+      },
+      set: function (newValue) {
+        this.$store.dispatch('updateFuturesAllMarketValue', newValue)
+      }
     }
   },
   methods: {
@@ -124,12 +119,10 @@ export default {
     },
     handleAddLine () {
       this.tableData.push({
-        startTime: '',
-        endTime: '',
-        country: '',
-        reasons: '', // 出国事由
-        approvalAuthority: '', // 审批机构
-        agency: ''// 代办机构
+        name: '',
+        futuresName: '', // 期货名称
+        futuresNumber: '', // 期货数量
+        futuresMarketValue: ''// 期货市值
       })
     }
   }
