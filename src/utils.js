@@ -364,7 +364,7 @@ export const propertyRight = [
   { key: '03', value: '经济适用房' },
   { key: '04', value: '限价房' },
   { key: '05', value: '自建房' },
-  { key: '06', value: '车库（车位、储藏室）' },
+  { key: '06', value: '车库（车位、储藏间）' },
   { key: '07', value: '其他' }
 ]
 // 表13 称谓 <===同===> 表12 与本人关系

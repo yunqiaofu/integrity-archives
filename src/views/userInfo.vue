@@ -1,6 +1,15 @@
 <template>
   <div style="text-align: center;">
-    <h2>报告人基本情况</h2>
+    <h2>
+      报告人基本情况
+      <el-tooltip
+        class="item"
+        effect="dark"
+        content="说明：①工作单位应填写全称或规范简称，同时担任多个职务的，请逐个分行填写。②身份证号码应填写18位公民身份号码。③领导岗位填分管工作，非领导岗位填从事的主要工作。"
+      >
+        <i class="el-icon-question" />
+      </el-tooltip>
+    </h2>
     <div>
       <el-form
         ref="form"
@@ -65,24 +74,70 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="6">
-            <el-form-item label="在职状态">
-              <el-select
-                v-model="form.workingStatus"
-                clearable
-                filterable
-                placeholder="请选择"
-              >
-                <el-option
-                  v-for="(item,i) in $utils.workingStatus"
-                  :key="item"
-                  :label="item"
-                  :value="i"
-                />
-              </el-select>
+          <el-row>
+            <el-col :span="8">
+              <el-form-item label="在职状态">
+                <el-select
+                  v-model="form.workingStatus"
+                  clearable
+                  filterable
+                  placeholder="请选择"
+                >
+                  <el-option
+                    v-for="(item,i) in $utils.workingStatus"
+                    :key="item"
+                    :label="item"
+                    :value="i"
+                  />
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label="工作单位">
+                <el-select
+                  v-model="form.employer"
+                  style="width:100%"
+                  clearable
+                  filterable
+                  placeholder="请选择"
+                >
+                  <el-option
+                    v-for="item in $utils.workOrganization"
+                    :key="item.key"
+                    :label="item.value"
+                    :value="item.key"
+                  />
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="8">
+              <el-form-item label="现任职务">
+                <el-input v-model="form.duty" />
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-col :span="12">
+            <el-form-item label="联系电话">
+              <el-input v-model="form.phone" />
             </el-form-item>
           </el-col>
-          <el-col :span="9">
+          <el-col :span="12">
+            <el-form-item label="身份证号">
+              <el-input v-model="form.idCard" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="从事或分管工作">
+              <el-input v-model="form.work" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="住址">
+              <el-input v-model="form.currentResidence" />
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="12">
             <el-form-item
               label="密码"
               prop="password"
@@ -100,7 +155,7 @@
               </el-input>
             </el-form-item>
           </el-col>
-          <el-col :span="9">
+          <el-col :span="12">
             <el-form-item
               label="确认密码"
               prop="checkPassword"
@@ -119,40 +174,6 @@
             </el-form-item>
           </el-col>
         </el-row>
-        <el-form-item label="从事或分管工作">
-          <el-input v-model="form.work" />
-        </el-form-item>
-        <el-form-item label="身份证号">
-          <el-input v-model="form.idCard" />
-        </el-form-item>
-        <el-form-item label="住址">
-          <el-input v-model="form.currentResidence" />
-        </el-form-item>
-        <el-row>
-          <el-col :span="12">
-            <el-form-item label="工作单位">
-              <el-select
-                v-model="form.employer"
-                style="width:100%"
-                clearable
-                filterable
-                placeholder="请选择"
-              >
-                <el-option
-                  v-for="item in $utils.workOrganization"
-                  :key="item.key"
-                  :label="item.value"
-                  :value="item.key"
-                />
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="联系电话">
-              <el-input v-model="form.phone" />
-            </el-form-item>
-          </el-col>
-        </el-row>
 
         <!-- <el-row :gutter="10">
           <el-col :span="20">
@@ -163,7 +184,7 @@
                     v-model="form.work"
                     style="width:100%"
                     placeholder="请选择"
-                  >
+                >
                     <el-option
                       v-for="item in $utils.workOrganization"
                       :key="item.key"
@@ -201,8 +222,7 @@
               </el-checkbox-group>
             </el-form-item>
             <el-form-item label="户籍地址">
-              <el-input v-model="form.householdRegistration" />
-            </el-form-item>
+              <el-input      </el-form-item>
             <el-form-item label="现居住地">
               <el-input v-model="form.currentResidence" />
             </el-form-item>
@@ -244,7 +264,7 @@
             type="textarea"
             :autosize="{ minRows: 2, maxRows: 6 }"
           />
-        </el-form-item> -->
+        </el-form-item>-->
 
         <!-- <el-form-item>
           <el-button
@@ -254,20 +274,20 @@
             立即创建
           </el-button>
           <el-button>取消</el-button>
-        </el-form-item> -->
+        </el-form-item>-->
       </el-form>
     </div>
-    <work />
+    <!-- <work /> -->
   </div>
 </template>
 
 <script>
-import work from './work'
+// import work from './work'
 import db from './../db.js'
 var JSZip = require('jszip')
 const fs = require('fs')
 export default {
-  components: { work },
+  // components: { work },
   data () {
     var validatePass = (rule, value, callback) => {
       if (value === '') {

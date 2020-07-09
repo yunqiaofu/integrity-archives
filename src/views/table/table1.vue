@@ -19,7 +19,7 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="产权人"
+      label="产权人姓名"
       width="180"
     >
       <template scope="scope">
@@ -90,7 +90,7 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="产权性质"
+      label="房产性质和功能类型"
     >
       <template scope="scope">
         <el-select
@@ -115,14 +115,14 @@
         <el-date-picker
           v-model="scope.row.transactionTime"
           style="width:150px"
-          type="date"
+          type="month"
           value-format="timestamp"
           placeholder="选择时间"
         />
       </template>
     </el-table-column>
     <el-table-column
-      label="交易价格(万)"
+      label="交易价格(万元)"
     >
       <template scope="scope">
         <el-input

@@ -19,7 +19,7 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="本人关系"
+      label="与本人关系"
       width="180"
     >
       <template scope="scope">

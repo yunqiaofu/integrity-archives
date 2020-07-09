@@ -42,7 +42,7 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="持股数量"
+      label="份额"
       width="180"
     >
       <template scope="scope">
@@ -54,7 +54,7 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="填报前一交易日市值（万元）"
+      label="填报前一交易日净值（万元）"
     >
       <template scope="scope">
         <el-input
@@ -69,7 +69,7 @@
       style="cursor: pointer;line-height: 30px;"
     >
       <div style="text-align:right;border-bottom:1px solid #ebeef5;padding:5px">
-        填报前一交易日所有期货的总市值（万元）
+        填报前一交易日所有期货的总净值
         <el-input
           v-model="allMarketValue"
           size="small"
