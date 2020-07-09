@@ -70,6 +70,7 @@
               <el-select
                 v-model="form.workingStatus"
                 clearable
+                filterable
                 placeholder="请选择"
               >
                 <el-option
@@ -131,8 +132,10 @@
           <el-col :span="12">
             <el-form-item label="工作单位">
               <el-select
-                v-model="form.work"
+                v-model="form.employer"
                 style="width:100%"
+                clearable
+                filterable
                 placeholder="请选择"
               >
                 <el-option

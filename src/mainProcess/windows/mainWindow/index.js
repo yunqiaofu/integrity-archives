@@ -60,14 +60,14 @@ class MainWindow {
         submenu: [
           {
             label: `关于${app.getName()}`,
-            accelerator: 'Command+I',
+            accelerator: 'CmdOrCtrl+I',
             click () {
               win.webContents.send('action', 'about')
             }
           },
           { label: '隐藏', role: 'hide' },
           { type: 'separator' },
-          { label: '退出', role: 'close', accelerator: 'Command+Q' }
+          { label: '退出', role: 'close', accelerator: 'CmdOrCtrl+Q' }
         ]
       },
       {
@@ -76,7 +76,7 @@ class MainWindow {
           {
             label: '打开',
             role: 'open',
-            accelerator: 'Command+O',
+            accelerator: 'CmdOrCtrl+O',
             click () {
               win.webContents.send('action', 'open')
             }
@@ -84,7 +84,7 @@ class MainWindow {
           {
             label: '保存',
             role: 'save',
-            accelerator: 'Command+S',
+            accelerator: 'CmdOrCtrl+S',
             click () {
               win.webContents.send('action', 'save')
             }
@@ -92,7 +92,7 @@ class MainWindow {
           {
             label: '新建',
             role: 'newSave',
-            accelerator: 'Command+N',
+            accelerator: 'CmdOrCtrl+N',
             click () {
               win.webContents.send('action', 'new')
             }

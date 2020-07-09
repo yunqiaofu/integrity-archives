@@ -7,6 +7,7 @@ const db = {
   nation: '', // 民族
   politicsStatus: '', // 政治面貌
   work: '', // 分管工作
+  employer: '', // 工作单位
   phone: '', // 联系电话
   department: '', // 部门
   duty: '', // 现任职务
