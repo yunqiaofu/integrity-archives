@@ -1,5 +1,5 @@
 
-# 🔥廉情信息报告表
+# 🔥廉情档案补采录入
 ⭐Using `vue-cli 3` and `Electron 9` built a modular desktop application template. Convenient packaging and program language switching,  with a custom borderless window, including `vue-router`, `vue-i18n`, `axios`, `electron-builder` and more common components, as well as some demo functions.
 
 ![npm](https://img.shields.io/npm/v/@vue/cli?color=aa&label=vue-cli)

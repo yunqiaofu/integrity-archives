@@ -7,6 +7,7 @@ const db = {
   nation: '', // 民族
   politicsStatus: '', // 政治面貌
   work: '', // 分管工作
+  phone: '', // 联系电话
   department: '', // 部门
   duty: '', // 现任职务
   partyTime: '', // 入党时间
@@ -75,9 +76,9 @@ const db = {
   },
   workingList: [
     {
-      employer: '', // 工作单位
-      duty: '', // 现任职务
-      phone: '' // 联系电话
+      // employer: '', // 工作单位
+      duty: '' // 现任职务
+      // phone: '' // 联系电话
     }
   ],
   // 人脉关系

@@ -127,6 +127,29 @@
         <el-form-item label="住址">
           <el-input v-model="form.currentResidence" />
         </el-form-item>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="工作单位">
+              <el-select
+                v-model="form.work"
+                style="width:100%"
+                placeholder="请选择"
+              >
+                <el-option
+                  v-for="item in $utils.workOrganization"
+                  :key="item.key"
+                  :label="item.value"
+                  :value="item.key"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="联系电话">
+              <el-input v-model="form.phone" />
+            </el-form-item>
+          </el-col>
+        </el-row>
 
         <!-- <el-row :gutter="10">
           <el-col :span="20">
@@ -299,9 +322,9 @@ export default {
   methods: {
     openDialogByRemote () {
       this.$dialog.showMessageBox({
-        title: '廉情信息报告表',
-        message: '欢迎使用廉情信息报告表',
-        detail: '1.1.0版',
+        title: '廉情档案补采录入',
+        message: '欢迎使用廉情档案补采录入',
+        detail: '0.0.2',
         type: 'info'
       })
     },

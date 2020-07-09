@@ -18,7 +18,7 @@
         />
       </template>
     </el-table-column>
-    <el-table-column
+    <!-- <el-table-column
       label="工作单位"
       width="180"
     >
@@ -38,7 +38,7 @@
           />
         </el-select>
       </template>
-    </el-table-column>
+    </el-table-column> -->
     <el-table-column
       label="现任职务"
     >
@@ -50,7 +50,7 @@
         />
       </template>
     </el-table-column>
-    <el-table-column
+    <!-- <el-table-column
       label="联系电话"
     >
       <template scope="scope">
@@ -60,7 +60,7 @@
           placeholder="请输入内容"
         />
       </template>
-    </el-table-column>
+    </el-table-column> -->
     <div
       slot="append"
       style="cursor: pointer;line-height: 30px;text-align:center;"
