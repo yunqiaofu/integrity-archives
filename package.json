@@ -1,7 +1,7 @@
 {
   "name": "integrity-archives",
   "productName": "廉情信息补填表",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": true,
   "scripts": {
     "dev": "vue-cli-service electron:serve",

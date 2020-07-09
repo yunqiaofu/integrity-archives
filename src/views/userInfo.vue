@@ -76,7 +76,7 @@
           </el-col>
         </el-row>
         <el-row>
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item label="在职状态">
               <el-select
                 v-model="form.workingStatus"
@@ -93,7 +93,7 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="6">
             <el-form-item label="工作单位">
               <el-select
                 v-model="form.employer"
@@ -111,7 +111,7 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="12">
             <el-form-item label="现任职务">
               <el-input v-model="form.duty" />
             </el-form-item>
@@ -347,7 +347,7 @@ export default {
       this.$dialog.showMessageBox({
         title: '廉情档案补采录入',
         message: '欢迎使用廉情档案补采录入',
-        detail: '0.0.2',
+        detail: '0.0.3',
         type: 'info'
       })
     },
