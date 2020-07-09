@@ -74,106 +74,106 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-row>
-            <el-col :span="8">
-              <el-form-item label="在职状态">
-                <el-select
-                  v-model="form.workingStatus"
-                  clearable
-                  filterable
-                  placeholder="请选择"
-                >
-                  <el-option
-                    v-for="(item,i) in $utils.workingStatus"
-                    :key="item"
-                    :label="item"
-                    :value="i"
-                  />
-                </el-select>
-              </el-form-item>
-            </el-col>
-            <el-col :span="8">
-              <el-form-item label="工作单位">
-                <el-select
-                  v-model="form.employer"
-                  style="width:100%"
-                  clearable
-                  filterable
-                  placeholder="请选择"
-                >
-                  <el-option
-                    v-for="item in $utils.workOrganization"
-                    :key="item.key"
-                    :label="item.value"
-                    :value="item.key"
-                  />
-                </el-select>
-              </el-form-item>
-            </el-col>
-            <el-col :span="8">
-              <el-form-item label="现任职务">
-                <el-input v-model="form.duty" />
-              </el-form-item>
-            </el-col>
-          </el-row>
-          <el-col :span="12">
-            <el-form-item label="联系电话">
-              <el-input v-model="form.phone" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="身份证号">
-              <el-input v-model="form.idCard" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="从事或分管工作">
-              <el-input v-model="form.work" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="住址">
-              <el-input v-model="form.currentResidence" />
-            </el-form-item>
-          </el-col>
-
-          <el-col :span="12">
-            <el-form-item
-              label="密码"
-              prop="password"
-            >
-              <el-input
-                v-model="form.password"
-                :type="passType?'password':'text'"
-                autocomplete="off"
+        </el-row>
+        <el-row>
+          <el-col :span="8">
+            <el-form-item label="在职状态">
+              <el-select
+                v-model="form.workingStatus"
+                clearable
+                filterable
+                placeholder="请选择"
               >
-                <el-button
-                  slot="append"
-                  icon="el-icon-view"
-                  @click="passType=!passType"
+                <el-option
+                  v-for="(item,i) in $utils.workingStatus"
+                  :key="item"
+                  :label="item"
+                  :value="i"
                 />
-              </el-input>
+              </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
-            <el-form-item
-              label="确认密码"
-              prop="checkPassword"
-            >
-              <el-input
-                v-model="form.checkPassword"
-                :type="checkPassType?'password':'text'"
-                autocomplete="off"
+          <el-col :span="8">
+            <el-form-item label="工作单位">
+              <el-select
+                v-model="form.employer"
+                style="width:100%"
+                clearable
+                filterable
+                placeholder="请选择"
               >
-                <el-button
-                  slot="append"
-                  icon="el-icon-view"
-                  @click="checkPassType=!checkPassType"
+                <el-option
+                  v-for="item in $utils.workOrganization"
+                  :key="item.key"
+                  :label="item.value"
+                  :value="item.key"
                 />
-              </el-input>
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="现任职务">
+              <el-input v-model="form.duty" />
             </el-form-item>
           </el-col>
         </el-row>
+        <el-col :span="12">
+          <el-form-item label="联系电话">
+            <el-input v-model="form.phone" />
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="身份证号">
+            <el-input v-model="form.idCard" />
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="从事或分管工作">
+            <el-input v-model="form.work" />
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="住址">
+            <el-input v-model="form.currentResidence" />
+          </el-form-item>
+        </el-col>
+
+        <el-col :span="12">
+          <el-form-item
+            label="密码"
+            prop="password"
+          >
+            <el-input
+              v-model="form.password"
+              :type="passType?'password':'text'"
+              autocomplete="off"
+            >
+              <el-button
+                slot="append"
+                icon="el-icon-view"
+                @click="passType=!passType"
+              />
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item
+            label="确认密码"
+            prop="checkPassword"
+          >
+            <el-input
+              v-model="form.checkPassword"
+              :type="checkPassType?'password':'text'"
+              autocomplete="off"
+            >
+              <el-button
+                slot="append"
+                icon="el-icon-view"
+                @click="checkPassType=!checkPassType"
+              />
+            </el-input>
+          </el-form-item>
+        </el-col>
 
         <!-- <el-row :gutter="10">
           <el-col :span="20">
